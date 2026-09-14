@@ -2145,5 +2145,95 @@
 
     renderAll();
   </script>
+  <script>
+(() => {
+  /* Liens directs et fiables pour les restaurants */
+  const safeRestaurantLinks = {
+    "pescatore":
+      "https://www.provencemed.com/restaurant/il-pescatore-4617217/",
+    "plage-argent-restaurant":
+      "https://www.provencemed.com/restaurant/la-plage-dargent-4616264/",
+    "poisson-ivre":
+      "https://www.provencemed.com/restaurant/le-poisson-ivre-6111710/",
+    "escale":
+      "https://www.provencemed.com/restaurant/lescale-4618162/"
+  };
+
+  restaurants.forEach(restaurant => {
+    if (safeRestaurantLinks[restaurant.id]) {
+      restaurant.link = safeRestaurantLinks[restaurant.id];
+    }
+  });
+
+  function createDirectRestaurantLinks() {
+    document
+      .querySelectorAll("#restaurantCards .experience-card")
+      .forEach(card => {
+        const title = card.querySelector("h3")?.textContent.trim();
+        const restaurant = restaurants.find(item => item.title === title);
+        const detailsButton =
+          card.querySelector(".card-actions button.button.ghost");
+
+        if (!restaurant || !detailsButton) return;
+
+        const link = document.createElement("a");
+        link.className = detailsButton.className;
+        link.href = restaurant.link;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = "Voir / réserver";
+
+        detailsButton.replaceWith(link);
+      });
+  }
+
+  /* Recrée les liens après chaque actualisation des cartes */
+  const originalRenderRestaurants = renderRestaurants;
+
+  renderRestaurants = function () {
+    originalRenderRestaurants();
+    createDirectRestaurantLinks();
+  };
+
+  createDirectRestaurantLinks();
+
+  /* Nom de la famille beaucoup plus visible */
+  const heroTitle = document.querySelector(".hero h1");
+
+  if (heroTitle) {
+    heroTitle.innerHTML = 'Les Léon <span>à Porquerolles</span>';
+  }
+
+  /*
+   * Quand le départ change, toute la journée est décalée
+   * du même nombre de minutes.
+   */
+  const departureInput = document.getElementById("depart");
+
+  departureInput.addEventListener("change", event => {
+    const oldDeparture = minutes(state.depart);
+    const newDeparture = minutes(event.target.value);
+
+    if (oldDeparture === 9999 || newDeparture === 9999) return;
+
+    const difference = newDeparture - oldDeparture;
+
+    if (difference === 0) return;
+
+    state.ferryOut = addMinutes(state.ferryOut, difference);
+    state.ferryBack = addMinutes(state.ferryBack, difference);
+
+    state.program.forEach(item => {
+      item.time = addMinutes(item.time, difference);
+    });
+
+    setTimeout(() => {
+      showToast(
+        "Toute la journée a été décalée. Vérifiez les horaires officiels TLV."
+      );
+    }, 0);
+  }, true);
+})();
+</script>
 </body>
 </html>
