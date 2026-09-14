@@ -2203,7 +2203,11 @@
   if (heroTitle) {
     heroTitle.innerHTML = 'Les Leon <span>à Porquerolles</span>';
   }
-
+document
+  .querySelectorAll(".brand span:last-child, .planner-header small, .hero-description")
+  .forEach(element => {
+    element.textContent = element.textContent.replaceAll("Léon", "Leon");
+  });
   /*
    * Quand le départ change, toute la journée est décalée
    * du même nombre de minutes.
