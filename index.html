@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#087f8c">
   <title>Les Léon à Porquerolles</title>
 
@@ -11,15 +11,16 @@
       --sea: #087f8c;
       --sea-dark: #075b66;
       --turquoise: #22b8b5;
-      --sand: #fff4d6;
+      --sand: #fff4dc;
       --sun: #ffca55;
       --coral: #ef7a65;
       --green: #3f8d72;
       --ink: #17373a;
       --muted: #637779;
-      --white: #ffffff;
-      --shadow: 0 14px 40px rgba(12, 71, 77, .13);
-      --radius: 24px;
+      --white: #fff;
+      --line: rgba(7, 91, 102, .14);
+      --shadow: 0 18px 55px rgba(16, 70, 75, .15);
+      --radius: 26px;
     }
 
     * {
@@ -34,1449 +35,2115 @@
       margin: 0;
       color: var(--ink);
       background:
-        radial-gradient(circle at 10% 20%, rgba(255,202,85,.22), transparent 28rem),
-        linear-gradient(180deg, #f7ffff 0%, #fffaf0 100%);
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        radial-gradient(circle at 8% 10%, rgba(255, 202, 85, .24), transparent 26rem),
+        linear-gradient(180deg, #f6fffd 0, #fffaf0 48rem, #f7f2e8 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    button, input, select {
+    button,
+    input,
+    select,
+    textarea {
       font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      width: 100%;
     }
 
     a {
       color: inherit;
     }
 
-    .hero {
-      position: relative;
-      min-height: 420px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #71d7eb 0 45%, #159fb2 45% 70%, #087f8c 70%);
+    .shell {
+      width: min(1380px, calc(100% - 32px));
+      margin-inline: auto;
     }
 
-    .hero svg {
+    .top-nav {
+      position: sticky;
+      z-index: 40;
+      top: 12px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      overflow-x: auto;
+      margin: 14px auto -78px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 22px;
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 12px 35px rgba(7,91,102,.15);
+      backdrop-filter: blur(18px);
+      scrollbar-width: none;
+    }
+
+    .top-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 0 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 14px;
+      color: white;
+      background: linear-gradient(145deg, var(--sea), var(--turquoise));
+    }
+
+    .top-nav a {
+      padding: 12px 15px;
+      border-radius: 14px;
+      color: #476264;
+      font-size: .91rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: .2s ease;
+    }
+
+    .top-nav a:hover {
+      color: var(--sea-dark);
+      background: #e6f8f6;
+      transform: translateY(-1px);
+    }
+
+    .top-nav .program-link {
+      margin-left: auto;
+      color: white;
+      background: linear-gradient(135deg, var(--sea), var(--turquoise));
+    }
+
+    .hero {
+      position: relative;
+      min-height: 670px;
+      overflow: hidden;
+      border-radius: 0 0 42px 42px;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(0,43,51,.82), rgba(0,69,76,.40) 53%, rgba(0,0,0,.05)),
+        url("https://provence-med.media.tourinsoft.eu/upload/42245271.jpg") center/cover;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      inset: auto 0 0;
+      height: 180px;
+      content: "";
+      background: linear-gradient(transparent, rgba(2,42,47,.54));
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 1180px;
-      margin: auto;
-      padding: 56px 22px 80px;
-    }
-
-    .hero-panel {
-      width: min(630px, 100%);
-      padding: 30px;
-      color: white;
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 30px;
-      background: rgba(4, 71, 79, .58);
-      box-shadow: 0 20px 60px rgba(0, 49, 57, .25);
-      backdrop-filter: blur(10px);
+      display: flex;
+      min-height: 670px;
+      max-width: 720px;
+      padding: 160px 0 70px;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .eyebrow {
       display: inline-flex;
+      width: fit-content;
       gap: 8px;
       align-items: center;
       padding: 8px 13px;
-      font-weight: 800;
-      font-size: .83rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.38);
       border-radius: 999px;
-      background: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.16);
+      font-size: .86rem;
+      font-weight: 900;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
     }
 
     h1 {
-      margin: 16px 0 8px;
-      font-family: Georgia, serif;
-      font-size: clamp(2.3rem, 7vw, 4.7rem);
-      line-height: .98;
+      max-width: 700px;
+      margin: 22px 0 14px;
+      font-size: clamp(3rem, 8vw, 6.4rem);
+      line-height: .92;
+      letter-spacing: -.065em;
     }
 
-    .hero p {
-      margin: 0;
-      max-width: 530px;
-      font-size: 1.08rem;
-      line-height: 1.55;
-    }
-
-    .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 21px;
-    }
-
-    .hero-pills span {
-      padding: 9px 13px;
-      font-size: .9rem;
-      font-weight: 750;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
-      color: var(--sea-dark);
-    }
-
-    .tabs-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      padding: 0 14px;
-    }
-
-    .tabs {
-      display: flex;
-      max-width: 1100px;
-      margin: -28px auto 0;
-      padding: 8px;
-      gap: 6px;
-      overflow-x: auto;
-      border: 1px solid #d8eceb;
-      border-radius: 20px;
-      background: rgba(255,255,255,.94);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-
-    .tab {
-      flex: 1 0 auto;
-      padding: 12px 15px;
-      border: 0;
-      border-radius: 14px;
-      color: #526b6d;
-      background: transparent;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .tab:hover {
-      background: #edf9f8;
-    }
-
-    .tab.active {
-      color: white;
-      background: linear-gradient(135deg, var(--sea), var(--turquoise));
-      box-shadow: 0 8px 20px rgba(8,127,140,.25);
-    }
-
-    main {
-      max-width: 1100px;
-      min-height: 650px;
-      margin: auto;
-      padding: 34px 18px 70px;
-    }
-
-    .page {
-      display: none;
-      animation: appear .25s ease;
-    }
-
-    .page.active {
+    .hero h1 span {
       display: block;
+      color: #ffe08a;
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: -.04em;
     }
 
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .section-title {
-      margin-bottom: 22px;
-    }
-
-    .section-title h2 {
-      margin: 0 0 7px;
-      font-family: Georgia, serif;
-      font-size: clamp(1.8rem, 5vw, 2.7rem);
-    }
-
-    .section-title p {
+    .hero-description {
+      max-width: 600px;
       margin: 0;
-      color: var(--muted);
-      line-height: 1.5;
+      color: rgba(255,255,255,.91);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      line-height: 1.65;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      padding: 22px;
-      border: 1px solid #dceceb;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.94);
-      box-shadow: var(--shadow);
-    }
-
-    .card h3 {
-      margin: 0 0 13px;
-      font-size: 1.16rem;
-    }
-
-    .field {
-      display: grid;
-      gap: 7px;
-      margin-bottom: 15px;
-    }
-
-    label {
-      font-size: .9rem;
-      font-weight: 800;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px 13px;
-      border: 1px solid #cbdedd;
-      border-radius: 12px;
-      color: var(--ink);
-      background: white;
-      outline: none;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--turquoise);
-      box-shadow: 0 0 0 4px rgba(34,184,181,.12);
-    }
-
-    .notice {
-      padding: 16px 18px;
-      margin-bottom: 18px;
-      border-left: 5px solid var(--sun);
-      border-radius: 14px;
-      background: #fff8dd;
-      line-height: 1.5;
-    }
-
-    .actions {
+    .hero-actions {
       display: flex;
+      gap: 12px;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
+      margin-top: 30px;
     }
 
     .button {
       display: inline-flex;
-      justify-content: center;
-      align-items: center;
+      min-height: 48px;
       gap: 8px;
-      padding: 12px 17px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
       border: 0;
-      border-radius: 13px;
+      border-radius: 15px;
       color: white;
       background: linear-gradient(135deg, var(--sea), var(--turquoise));
-      box-shadow: 0 8px 18px rgba(8,127,140,.2);
-      font-weight: 850;
+      box-shadow: 0 9px 22px rgba(8,127,140,.22);
+      font-weight: 900;
       text-decoration: none;
-      cursor: pointer;
+      transition: .2s ease;
     }
 
     .button:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 13px 28px rgba(8,127,140,.28);
     }
 
-    .button.secondary {
+    .button.coral {
+      background: linear-gradient(135deg, #ef705a, #ff9b6e);
+    }
+
+    .button.light {
       color: var(--sea-dark);
-      border: 1px solid #b9ddda;
       background: white;
+    }
+
+    .button.ghost {
+      color: var(--sea-dark);
+      border: 1px solid var(--line);
+      background: #f4fbfa;
       box-shadow: none;
     }
 
-    .button.whatsapp {
-      background: #1da851;
+    .button.small {
+      min-height: 40px;
+      padding: 9px 13px;
+      font-size: .88rem;
     }
 
-    .visit-grid, .parking-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .visit-card {
-      overflow: hidden;
-      padding: 0;
-      transition: .2s ease;
-    }
-
-    .visit-card.selected {
-      border-color: var(--turquoise);
-      box-shadow: 0 15px 42px rgba(8,127,140,.22);
-    }
-
-    .visit-art {
-      display: grid;
-      min-height: 145px;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      font-size: 4rem;
-      background: linear-gradient(145deg, var(--c1), var(--c2));
-    }
-
-    .visit-art::before,
-    .visit-art::after {
-      content: "";
+    .hero-stats {
       position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,.22);
-    }
-
-    .visit-art::before {
-      width: 160px;
-      height: 160px;
-      left: -50px;
-      bottom: -100px;
-    }
-
-    .visit-art::after {
-      width: 100px;
-      height: 100px;
-      right: -25px;
-      top: -35px;
-    }
-
-    .visit-art span {
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 7px 6px rgba(0,0,0,.15));
-    }
-
-    .visit-content {
-      padding: 19px;
-    }
-
-    .visit-head {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .visit-head input {
-      width: 23px;
-      height: 23px;
-      flex: 0 0 auto;
-      accent-color: var(--sea);
-    }
-
-    .visit-head h3 {
-      margin-bottom: 5px;
-    }
-
-    .visit-content p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .visit-settings {
+      z-index: 3;
+      right: 5%;
+      bottom: 34px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 17px;
+      grid-template-columns: repeat(3, auto);
+      gap: 8px;
     }
 
-    .parking-card {
+    .hero-stat {
+      min-width: 118px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 17px;
+      background: rgba(0,50,57,.42);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1.15rem;
+    }
+
+    .hero-stat span {
+      color: rgba(255,255,255,.78);
+      font-size: .76rem;
+    }
+
+    main {
+      padding: 55px 0 100px;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .section {
+      margin-bottom: 58px;
+      scroll-margin-top: 110px;
+    }
+
+    .section-heading {
+      display: flex;
+      gap: 18px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .kicker {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--coral);
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--sea-dark);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .section-heading p {
+      max-width: 500px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .panel {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow);
+    }
+
+    .prepare-panel {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+    }
+
+    .prepare-intro {
+      min-height: 310px;
+      padding: 34px;
+      color: white;
+      background:
+        linear-gradient(140deg, rgba(7,91,102,.96), rgba(20,155,156,.72)),
+        url("https://provence-med.media.tourinsoft.eu/upload/42241294.jpg") center/cover;
+    }
+
+    .prepare-intro h3 {
+      max-width: 410px;
+      margin: 14px 0 10px;
+      font-size: 2.25rem;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .prepare-intro p {
+      color: rgba(255,255,255,.84);
+      line-height: 1.6;
+    }
+
+    .prepare-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 15px;
+      padding: 28px;
+      align-content: center;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: #466164;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .025em;
+    }
+
+    label.full {
+      grid-column: 1 / -1;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 45px;
+      padding: 10px 12px;
+      border: 1px solid #cfe3e1;
+      border-radius: 12px;
+      outline: none;
+      color: var(--ink);
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--turquoise);
+      box-shadow: 0 0 0 4px rgba(34,184,181,.12);
+    }
+
+    textarea {
+      min-height: 94px;
+      resize: vertical;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .filter {
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #577174;
+      background: rgba(255,255,255,.8);
+      font-size: .84rem;
+      font-weight: 850;
+    }
+
+    .filter.active,
+    .filter:hover {
+      color: white;
+      border-color: var(--sea);
+      background: var(--sea);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .experience-card {
       position: relative;
-      padding-top: 58px;
-      cursor: pointer;
-      transition: .2s ease;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 23px;
+      background: white;
+      box-shadow: 0 13px 36px rgba(26,79,82,.10);
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
-    .parking-card.selected {
-      border: 2px solid var(--turquoise);
-      background: #f3fffe;
-      transform: translateY(-2px);
+    .experience-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 50px rgba(26,79,82,.16);
+    }
+
+    .photo {
+      position: relative;
+      height: 215px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #bce9e5, #fff0c8);
+    }
+
+    .photo img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform .55s ease;
+    }
+
+    .experience-card:hover .photo img {
+      transform: scale(1.045);
     }
 
     .badge {
       position: absolute;
-      top: 18px;
-      left: 18px;
-      padding: 7px 11px;
+      top: 14px;
+      left: 14px;
+      padding: 7px 10px;
       border-radius: 999px;
-      color: white;
-      background: var(--coral);
-      font-size: .78rem;
-      font-weight: 900;
-      letter-spacing: .04em;
+      color: var(--sea-dark);
+      background: rgba(255,255,255,.93);
+      box-shadow: 0 5px 18px rgba(0,0,0,.12);
+      font-size: .73rem;
+      font-weight: 950;
     }
 
-    .badge.free {
-      background: var(--green);
-    }
-
-    .parking-card input[type="radio"] {
+    .credit {
       position: absolute;
-      top: 19px;
-      right: 19px;
-      width: 22px;
-      height: 22px;
-      accent-color: var(--sea);
+      right: 8px;
+      bottom: 7px;
+      padding: 4px 7px;
+      border-radius: 7px;
+      color: rgba(255,255,255,.92);
+      background: rgba(0,0,0,.36);
+      font-size: .58rem;
     }
 
-    .address {
+    .card-body {
+      padding: 21px;
+    }
+
+    .card-body h3 {
+      margin: 0;
+      color: var(--sea-dark);
+      font-size: 1.32rem;
+      letter-spacing: -.025em;
+    }
+
+    .card-body p {
       min-height: 48px;
+      margin: 9px 0 14px;
       color: var(--muted);
-      line-height: 1.45;
+      font-size: .91rem;
+      line-height: 1.5;
     }
 
-    .parking-info {
-      margin: 13px 0 0;
-      padding-left: 19px;
-      color: #496365;
-      line-height: 1.65;
+    .meta-list {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 17px;
+    }
+
+    .meta {
+      padding: 6px 9px;
+      border-radius: 9px;
+      color: #436164;
+      background: #edf8f6;
+      font-size: .73rem;
+      font-weight: 850;
+    }
+
+    .meta.price {
+      color: #8e4b32;
+      background: #fff0e5;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 9px;
+    }
+
+    .card-actions .button {
+      flex: 1;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .info-card {
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: white;
+      box-shadow: 0 12px 30px rgba(26,79,82,.09);
+    }
+
+    .info-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 16px;
+      place-items: center;
+      border-radius: 15px;
+      background: #e3f7f4;
+      font-size: 1.35rem;
+    }
+
+    .info-card h3 {
+      margin: 0 0 9px;
+      color: var(--sea-dark);
+    }
+
+    .info-card p {
+      margin: 0 0 13px;
+      color: var(--muted);
+      font-size: .87rem;
+      line-height: 1.55;
+    }
+
+    .tariff {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      margin: 13px 0;
+    }
+
+    .tariff strong {
+      color: var(--coral);
+      font-size: 1.5rem;
+    }
+
+    .tariff span {
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    .source-link {
+      color: var(--sea);
+      font-size: .82rem;
+      font-weight: 900;
+    }
+
+    .notice {
+      padding: 17px 19px;
+      border: 1px solid rgba(239,122,101,.24);
+      border-radius: 17px;
+      color: #73483d;
+      background: #fff3ea;
+      font-size: .85rem;
+      line-height: 1.55;
+    }
+
+    .planner {
+      position: sticky;
+      top: 105px;
+      overflow: hidden;
+      border: 1px solid rgba(7,91,102,.17);
+      border-radius: 28px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 24px 70px rgba(10,66,71,.19);
+      scroll-margin-top: 110px;
+    }
+
+    .planner-header {
+      padding: 23px;
+      color: white;
+      background:
+        radial-gradient(circle at 100% 0, rgba(255,202,85,.46), transparent 12rem),
+        linear-gradient(135deg, var(--sea-dark), var(--sea));
+    }
+
+    .planner-header small {
+      color: rgba(255,255,255,.76);
+      font-weight: 800;
+    }
+
+    .planner-header h2 {
+      margin-top: 5px;
+      color: white;
+      font-size: 1.7rem;
+    }
+
+    .save-status {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      margin-top: 13px;
+      color: rgba(255,255,255,.82);
+      font-size: .75rem;
+    }
+
+    .save-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8dffbc;
+      box-shadow: 0 0 0 4px rgba(141,255,188,.15);
     }
 
     .timeline {
-      position: relative;
-      margin-top: 20px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding: 17px;
     }
 
-    .timeline::before {
-      content: "";
-      position: absolute;
-      top: 8px;
-      bottom: 8px;
-      left: 57px;
-      width: 3px;
-      border-radius: 4px;
-      background: #b8dedc;
+    .timeline-empty {
+      padding: 28px 14px;
+      color: var(--muted);
+      text-align: center;
     }
 
     .timeline-item {
       position: relative;
       display: grid;
-      grid-template-columns: 45px 22px 1fr;
-      gap: 12px;
-      align-items: start;
-      margin: 0 0 17px;
+      grid-template-columns: 58px 1fr;
+      gap: 10px;
+      padding-bottom: 13px;
+    }
+
+    .timeline-item::before {
+      position: absolute;
+      top: 29px;
+      bottom: -4px;
+      left: 62px;
+      width: 2px;
+      content: "";
+      background: #cbe9e5;
+    }
+
+    .timeline-item:last-child::before {
+      display: none;
     }
 
     .timeline-time {
-      padding-top: 11px;
-      font-weight: 900;
-      color: var(--sea-dark);
+      padding-top: 8px;
+      color: var(--sea);
+      font-size: .78rem;
+      font-weight: 950;
     }
 
-    .timeline-dot {
-      z-index: 1;
-      width: 17px;
-      height: 17px;
-      margin-top: 12px;
-      border: 4px solid white;
+    .timeline-box {
+      position: relative;
+      padding: 11px 11px 11px 16px;
+      border-radius: 14px;
+      background: #f4f9f8;
+    }
+
+    .timeline-box::before {
+      position: absolute;
+      top: 12px;
+      left: -16px;
+      width: 10px;
+      height: 10px;
+      border: 3px solid white;
       border-radius: 50%;
+      content: "";
       background: var(--coral);
       box-shadow: 0 0 0 2px var(--coral);
     }
 
-    .timeline-content {
-      padding: 13px 16px;
-      border-radius: 15px;
-      background: white;
-      box-shadow: 0 7px 20px rgba(12,71,77,.09);
-    }
-
-    .timeline-content strong {
+    .timeline-box strong {
       display: block;
       margin-bottom: 3px;
+      font-size: .84rem;
     }
 
-    .summary-empty {
-      padding: 35px;
-      text-align: center;
+    .timeline-box span {
       color: var(--muted);
-      border: 2px dashed #bddbd9;
-      border-radius: 20px;
+      font-size: .71rem;
     }
 
-    .source-list {
+    .timeline-controls {
       display: grid;
-      gap: 12px;
+      grid-template-columns: 1fr 76px 32px;
+      gap: 5px;
+      margin-top: 8px;
     }
 
-    .source-link {
-      display: block;
-      padding: 16px;
-      border: 1px solid #d8e9e8;
-      border-radius: 14px;
-      background: white;
-      text-decoration: none;
+    .timeline-controls input {
+      min-height: 34px;
+      padding: 5px;
+      font-size: .72rem;
     }
 
-    .source-link:hover {
-      border-color: var(--turquoise);
+    .remove {
+      width: 32px;
+      height: 34px;
+      border: 0;
+      border-radius: 9px;
+      color: #a24b42;
+      background: #ffe8e4;
+      font-weight: 950;
     }
 
-    .source-link strong {
-      display: block;
-      margin-bottom: 4px;
+    .budget {
+      padding: 19px 21px;
+      border-top: 1px solid var(--line);
+      background: #fffaf0;
     }
 
-    .small {
+    .budget-line {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
       color: var(--muted);
-      font-size: .86rem;
+      font-size: .8rem;
+    }
+
+    .budget-total {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 13px;
+      border-top: 1px dashed #dfcab0;
+    }
+
+    .budget-total strong:last-child {
+      color: var(--coral);
+      font-size: 1.8rem;
+    }
+
+    .planner-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 0 18px 18px;
+      background: #fffaf0;
+    }
+
+    .planner-actions .button:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .custom-form {
+      display: grid;
+      grid-template-columns: 1.2fr .7fr .7fr;
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .custom-form .button {
+      grid-column: 1 / -1;
+    }
+
+    dialog {
+      width: min(690px, calc(100% - 26px));
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 25px;
+      color: var(--ink);
+      background: white;
+      box-shadow: 0 30px 100px rgba(0,35,40,.34);
+    }
+
+    dialog::backdrop {
+      background: rgba(2,36,41,.7);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-photo {
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 25px;
+    }
+
+    .modal-content h2 {
+      padding-right: 45px;
+      font-size: 2rem;
+    }
+
+    .modal-description {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .modal-facts {
+      display: grid;
+      gap: 9px;
+      margin: 18px 0;
+    }
+
+    .modal-fact {
+      padding: 12px;
+      border-radius: 12px;
+      background: #f2f9f7;
+      font-size: .87rem;
       line-height: 1.45;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 3;
+      display: grid;
+      width: 39px;
+      height: 39px;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.94);
+      font-size: 1.2rem;
+      font-weight: 950;
     }
 
     .toast {
       position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 50;
+      z-index: 100;
+      right: 22px;
+      bottom: 22px;
       max-width: 340px;
-      padding: 13px 17px;
+      padding: 14px 17px;
+      border-radius: 14px;
       color: white;
-      border-radius: 13px;
-      background: #17373a;
+      background: var(--sea-dark);
       box-shadow: var(--shadow);
       opacity: 0;
-      transform: translateY(20px);
       pointer-events: none;
+      transform: translateY(18px);
       transition: .25s ease;
     }
 
     .toast.show {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
 
     footer {
-      padding: 30px 20px 45px;
-      color: #637779;
+      padding: 30px 16px 50px;
+      color: #6c7d7e;
       text-align: center;
+      font-size: .78rem;
+      line-height: 1.6;
+    }
+
+    footer a {
+      color: var(--sea);
+      font-weight: 850;
+    }
+
+    @media (max-width: 1080px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .planner {
+        position: relative;
+        top: auto;
+      }
+
+      .timeline {
+        max-height: none;
+      }
+
+      .info-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
     }
 
     @media (max-width: 760px) {
-      .hero {
-        min-height: 500px;
+      .shell {
+        width: min(100% - 20px, 1380px);
+      }
+
+      .brand span:last-child {
+        display: none;
+      }
+
+      .top-nav {
+        margin-bottom: -72px;
+      }
+
+      .top-nav a {
+        padding: 10px 12px;
+        font-size: .82rem;
+      }
+
+      .hero,
+      .hero-content {
+        min-height: 650px;
       }
 
       .hero-content {
-        padding-top: 35px;
+        padding-top: 130px;
       }
 
-      .hero-panel {
-        padding: 23px;
+      .hero-stats {
+        right: 10px;
+        bottom: 15px;
+        left: 10px;
+        grid-template-columns: repeat(3,1fr);
       }
 
-      .tabs {
-        justify-content: flex-start;
+      .hero-stat {
+        min-width: 0;
+        padding: 10px;
       }
 
-      .grid,
-      .grid-3,
-      .visit-grid,
-      .parking-grid {
+      .prepare-panel {
         grid-template-columns: 1fr;
       }
 
-      .visit-settings {
+      .prepare-intro {
+        min-height: 240px;
+      }
+
+      .cards,
+      .info-grid {
         grid-template-columns: 1fr;
       }
 
-      .actions .button {
-        width: 100%;
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .custom-form {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .custom-form label:first-child {
+        grid-column: 1 / -1;
       }
     }
   </style>
 </head>
 
 <body>
+  <nav class="top-nav shell" aria-label="Navigation principale">
+    <div class="brand">
+      <span class="brand-mark">L</span>
+      <span>Les Léon</span>
+    </div>
+    <a href="#preparer">☀️ Préparer</a>
+    <a href="#explorer">🌴 Explorer</a>
+    <a href="#bateau">⛴️ Bateau</a>
+    <a href="#velos">🚲 Vélos</a>
+    <a href="#parkings">🅿️ Parkings</a>
+    <a href="#restaurants">🍽️ Restaurants</a>
+    <a class="program-link" href="#programme">✨ Mon programme</a>
+  </nav>
+
   <header class="hero">
-    <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#70d8ec"/>
-          <stop offset="1" stop-color="#dff8ef"/>
-        </linearGradient>
-        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#2fc2cc"/>
-          <stop offset="1" stop-color="#087f8c"/>
-        </linearGradient>
-      </defs>
+    <div class="shell hero-content">
+      <span class="eyebrow">Escapade familiale • Porquerolles</span>
+      <h1>Une journée <span>inoubliable</span></h1>
+      <p class="hero-description">
+        Préparez librement la journée de la famille Léon : bateau, plages,
+        patrimoine, vélos et restaurants. Vos choix restent enregistrés.
+      </p>
 
-      <rect width="1200" height="220" fill="url(#sky)"/>
-      <rect y="220" width="1200" height="200" fill="url(#sea)"/>
-      <circle cx="1040" cy="83" r="48" fill="#ffd267" opacity=".95"/>
-
-      <path d="M600 238 C700 145 805 170 875 215 C950 165 1040 190 1200 240 L1200 310 L580 310 Z"
-            fill="#417d63"/>
-      <path d="M650 250 C740 190 850 210 925 240 C1030 205 1100 230 1200 250 L1200 322 L630 322 Z"
-            fill="#69a66e"/>
-
-      <g fill="#fff7dc">
-        <rect x="815" y="202" width="38" height="35" rx="3"/>
-        <rect x="860" y="218" width="48" height="28" rx="3"/>
-        <rect x="920" y="208" width="34" height="33" rx="3"/>
-        <rect x="970" y="223" width="55" height="27" rx="3"/>
-      </g>
-
-      <g fill="none" stroke="#b8f1ed" stroke-width="4" opacity=".65">
-        <path d="M0 282 Q90 265 180 282 T360 282 T540 282"/>
-        <path d="M510 350 Q620 330 730 350 T950 350 T1170 350"/>
-        <path d="M60 390 Q170 370 280 390 T500 390"/>
-      </g>
-
-      <g transform="translate(980 286)">
-        <path d="M0 20 L80 20 L65 34 L12 34 Z" fill="#fff"/>
-        <path d="M38 -55 L38 20 L78 16 Z" fill="#fff7dc"/>
-        <path d="M34 -44 L34 17 L5 14 Z" fill="#ef7a65"/>
-      </g>
-
-      <g transform="translate(710 310) scale(.7)">
-        <path d="M0 20 L80 20 L65 34 L12 34 Z" fill="#fff"/>
-        <path d="M38 -55 L38 20 L78 16 Z" fill="#fff7dc"/>
-      </g>
-    </svg>
-
-    <div class="hero-content">
-      <div class="hero-panel">
-        <span class="eyebrow">☀️ Escapade en Méditerranée</span>
-        <h1>Les Léon à Porquerolles</h1>
-        <p>
-          Une journée familiale à organiser simplement :
-          traversée, visites, plages, parkings et programme à partager.
-        </p>
-
-        <div class="hero-pills">
-          <span>🚗 Départ Roquebrune-sur-Argens</span>
-          <span>⛴️ Embarquement Tour Fondue</span>
-          <span>💾 Choix sauvegardés</span>
-        </div>
+      <div class="hero-actions">
+        <a class="button coral" href="#explorer">Découvrir les visites</a>
+        <a class="button light" href="#programme">Voir mon programme</a>
       </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>20 min</strong><span>de traversée TLV</span></div>
+      <div class="hero-stat"><strong>51 km</strong><span>de pistes cyclables</span></div>
+      <div class="hero-stat"><strong>100 %</strong><span>modifiable</span></div>
     </div>
   </header>
 
-  <div class="tabs-wrap">
-    <nav class="tabs" aria-label="Rubriques">
-      <button class="tab active" data-tab="organiser">🗓️ Organiser</button>
-      <button class="tab" data-tab="visites">🏝️ Visites</button>
-      <button class="tab" data-tab="navettes">⛴️ Navettes</button>
-      <button class="tab" data-tab="parkings">🅿️ Parkings</button>
-      <button class="tab" data-tab="journee">✨ Ma journée</button>
-      <button class="tab" data-tab="pratique">ℹ️ Pratique</button>
-    </nav>
-  </div>
+  <main class="shell">
+    <div class="page-grid">
+      <div class="content">
 
-  <main>
-    <section class="page active" id="organiser">
-      <div class="section-title">
-        <h2>Préparer l’excursion</h2>
-        <p>Les informations sont enregistrées automatiquement sur cet appareil.</p>
-      </div>
-
-      <div class="grid">
-        <article class="card">
-          <h3>👨‍👩‍👧‍👦 Notre sortie</h3>
-
-          <div class="field">
-            <label for="tripDate">Date de l’excursion</label>
-            <input type="date" id="tripDate">
+        <section class="section" id="preparer">
+          <div class="section-heading">
+            <div>
+              <span class="kicker">Avant de partir</span>
+              <h2>Préparer l’escapade</h2>
+              <p>Modifiez les horaires et options. La journée se recalcule automatiquement.</p>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="people">Nombre de personnes</label>
-            <input type="number" id="people" min="1" max="30">
+          <div class="panel prepare-panel">
+            <div class="prepare-intro">
+              <span class="eyebrow">Départ de Roquebrune-sur-Argens</span>
+              <h3>Votre journée, votre rythme</h3>
+              <p>
+                Les horaires sont entièrement réglables. Vous pouvez ajouter ou retirer
+                une visite, un restaurant et même une activité personnelle.
+              </p>
+            </div>
+
+            <div class="prepare-form">
+              <label>
+                Date de la sortie
+                <input id="date" type="date">
+              </label>
+
+              <label>
+                Nombre de personnes
+                <input id="people" type="number" min="1" max="30">
+              </label>
+
+              <label class="full">
+                Lieu de départ
+                <input id="startPlace" type="text">
+              </label>
+
+              <label>
+                Départ en voiture
+                <input id="depart" type="time">
+              </label>
+
+              <label>
+                Trajet routier
+                <input id="travelMinutes" type="number" min="30" max="240" step="5">
+              </label>
+
+              <label>
+                Navette aller
+                <input id="ferryOut" type="time">
+              </label>
+
+              <label>
+                Navette retour
+                <input id="ferryBack" type="time">
+              </label>
+
+              <label>
+                Prix bateau / personne
+                <input id="boatPrice" type="number" min="0" step=".5">
+              </label>
+
+              <label>
+                Parking choisi
+                <select id="parking">
+                  <option value="arromanches">P+R Arromanches — gratuit</option>
+                  <option value="iles">Parking des Îles — payant</option>
+                  <option value="tpm">Parking TPM Tour Fondue — payant</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="explorer">
+          <div class="section-heading">
+            <div>
+              <span class="kicker">À voir sur l’île</span>
+              <h2>Choisissez vos coups de cœur</h2>
+              <p>Ouvrez chaque fiche pour consulter les horaires, le tarif et le lien officiel.</p>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="drive">Durée prévue jusqu’à la Tour Fondue</label>
-            <select id="drive">
-              <option value="90">1 h 30</option>
-              <option value="105">1 h 45</option>
-              <option value="120">2 h</option>
-              <option value="135">2 h 15</option>
-            </select>
+          <div class="filters" id="visitFilters">
+            <button class="filter active" data-filter="all">Tout voir</button>
+            <button class="filter" data-filter="plage">Plages</button>
+            <button class="filter" data-filter="patrimoine">Patrimoine</button>
+            <button class="filter" data-filter="art">Art</button>
+            <button class="filter" data-filter="nature">Nature</button>
           </div>
 
-          <div class="field">
-            <label for="margin">Marge avant le bateau</label>
-            <select id="margin">
-              <option value="30">30 minutes</option>
-              <option value="45">45 minutes</option>
-              <option value="60">1 heure</option>
-            </select>
-          </div>
-        </article>
+          <div class="cards" id="visitCards"></div>
+        </section>
 
-        <article class="card">
-          <h3>⛴️ Traversée choisie</h3>
-
-          <div class="field">
-            <label for="boatOut">Départ Tour Fondue</label>
-            <input type="time" id="boatOut">
+        <section class="section" id="bateau">
+          <div class="section-heading">
+            <div>
+              <span class="kicker">Tour Fondue ↔ Porquerolles</span>
+              <h2>La navette TLV</h2>
+              <p>Les départs varient selon la date. Consultez toujours l’horaire officiel avant le voyage.</p>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="boatBack">Retour depuis Porquerolles</label>
-            <input type="time" id="boatBack">
+          <div class="info-grid">
+            <article class="info-card">
+              <div class="info-icon">⛴️</div>
+              <h3>Traversée directe</h3>
+              <p>Départ de la Tour Fondue. La traversée annoncée par TLV dure environ 20 minutes.</p>
+              <div class="tariff"><strong>dès 24 €</strong><span>aller-retour adulte</span></div>
+              <a class="source-link" target="_blank" rel="noopener"
+                 href="https://tlv-tvm.resactivite.com/liaison-tour-fondue-porquerolles-aller-retour-3">
+                Réserver avec TLV →
+              </a>
+            </article>
+
+            <article class="info-card">
+              <div class="info-icon">🕒</div>
+              <h3>Horaires officiels</h3>
+              <p>Choisissez d’abord la date. Les horaires sont saisonniers et peuvent être adaptés.</p>
+              <a class="source-link" target="_blank" rel="noopener"
+                 href="https://www.tlv-tvm.com/iframe-horaires/?trajet=porquerolles">
+                Consulter les horaires →
+              </a>
+            </article>
+
+            <article class="info-card">
+              <div class="info-icon">↩️</div>
+              <h3>Retour flexible</h3>
+              <p>Le retour n’exige généralement pas de créneau réservé. Prévoyez une marge avant l’embarquement.</p>
+              <a class="source-link" target="_blank" rel="noopener"
+                 href="https://tlv-tvm.resactivite.com/">
+                Informations TLV →
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="velos">
+          <div class="section-heading">
+            <div>
+              <span class="kicker">Se déplacer sur l’île</span>
+              <h2>Location de vélos</h2>
+              <p>Les loueurs sont installés près du port. En été, il est prudent de réserver à l’avance.</p>
+            </div>
           </div>
 
-          <div class="notice">
-            Les horaires changent selon la période et la météo.
-            Vérifiez toujours l’horaire officiel avant le départ.
+          <div class="cards">
+            <article class="experience-card">
+              <div class="photo">
+                <img src="https://www.provencemed.com/assets/uploads/2025/10/faire-vtt-porquerolles.jpg"
+                     alt="Promenade à vélo à Porquerolles">
+                <span class="badge">Bateau + VTT</span>
+                <span class="credit">Photo : Provence Méditerranée</span>
+              </div>
+              <div class="card-body">
+                <h3>Pack VTT classique</h3>
+                <p>Traversée aller-retour et location d’un VTT classique pour la journée.</p>
+                <div class="meta-list">
+                  <span class="meta price">39 € adulte</span>
+                  <span class="meta">36 € enfant*</span>
+                </div>
+                <div class="card-actions">
+                  <a class="button ghost small" target="_blank" rel="noopener"
+                     href="https://www.provencemed.com/loisirs/pack-bateau-vtt-porquerolles/">
+                    Détails
+                  </a>
+                  <button class="button small" onclick="setBike('classic')">Choisir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <div class="photo">
+                <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=1200&q=85"
+                     alt="Vélos électriques">
+                <span class="badge">Confort</span>
+                <span class="credit">Photo d’ambiance : Unsplash</span>
+              </div>
+              <div class="card-body">
+                <h3>Pack VTT électrique</h3>
+                <p>Traversée aller-retour et VTT électrique pour explorer l’île plus facilement.</p>
+                <div class="meta-list">
+                  <span class="meta price">64 € / adulte</span>
+                  <span class="meta">Taille minimale 1,40 m</span>
+                </div>
+                <div class="card-actions">
+                  <a class="button ghost small" target="_blank" rel="noopener"
+                     href="https://www.provencemed.com/loisirs/pack-bateau-vtt-electrique-porquerolles/">
+                    Détails
+                  </a>
+                  <button class="button small" onclick="setBike('electric')">Choisir</button>
+                </div>
+              </div>
+            </article>
           </div>
 
-          <div class="actions">
-            <a class="button" target="_blank"
-               href="https://www.tlv-tvm.com/iframe-horaires/?trajet=porquerolles">
-              Voir les horaires TLV
-            </a>
+          <p class="notice" style="margin-top:16px">
+            * Les packs incluent déjà le bateau. Le calculateur évite donc de compter la traversée deux fois.
+            Les conditions exactes restent à vérifier auprès de l’office de tourisme.
+          </p>
+        </section>
 
-            <a class="button secondary" target="_blank"
-               href="https://tlv-tvm.resactivite.com/liaison-tour-fondue-porquerolles-aller-retour-3">
-              Réserver
-            </a>
+        <section class="section" id="parkings">
+          <div class="section-heading">
+            <div>
+              <span class="kicker">Près de l’embarcadère</span>
+              <h2>Où garer la voiture ?</h2>
+              <p>Les tarifs ci-dessous sont indicatifs. Le tarif affiché à l’entrée du parking reste prioritaire.</p>
+            </div>
           </div>
-        </article>
-      </div>
 
-      <div class="actions">
-        <button class="button" id="goVisits">Choisir nos visites →</button>
-      </div>
-    </section>
+          <div class="info-grid">
+            <article class="info-card">
+              <div class="info-icon">🚌</div>
+              <h3>P+R Arromanches</h3>
+              <p>
+                Rond-point Arromanches, route de l’Aéroport, Hyères. Environ 631 places,
+                puis ligne 67 vers la Tour Fondue.
+              </p>
+              <div class="tariff"><strong>Gratuit</strong><span>parking relais</span></div>
+              <a class="source-link" target="_blank" rel="noopener"
+                 href="https://www.provencemed.com/preparer-ma-venue/transport-et-acces/se-deplacer-sur-le-territoire/prendre-le-bus-67-vers-porquerolles/">
+                Accès et ligne 67 →
+              </a>
+            </article>
 
-    <section class="page" id="visites">
-      <div class="section-title">
-        <h2>Que souhaitez-vous découvrir ?</h2>
-        <p>Cochez les activités puis indiquez une heure et une durée.</p>
-      </div>
+            <article class="info-card">
+              <div class="info-icon">🅿️</div>
+              <h3>Parking des Îles</h3>
+              <p>
+                1852 avenue des Arbanais, Giens. À proximité de la Tour Fondue.
+                Disponibilité selon la période.
+              </p>
+              <div class="tariff"><strong>2,40 €/h</strong><span>plafond annoncé : 21 €/24 h</span></div>
+              <a class="source-link" target="_blank" rel="noopener"
+                 href="https://www.parkingdesiles.com/">
+                Site du parking →
+              </a>
+            </article>
 
-      <div class="visit-grid" id="visitGrid"></div>
-
-      <div class="actions">
-        <button class="button" id="autoPlan">✨ Créer les horaires automatiquement</button>
-        <button class="button secondary" data-open="journee">Voir ma journée</button>
-      </div>
-    </section>
-
-    <section class="page" id="navettes">
-      <div class="section-title">
-        <h2>Navette vers Porquerolles</h2>
-        <p>La traversée depuis la Tour Fondue dure généralement une vingtaine de minutes.</p>
-      </div>
-
-      <div class="grid">
-        <article class="card">
-          <h3>Aller</h3>
-          <p>Tour Fondue → Porquerolles</p>
-
-          <div class="field">
-            <label for="boatOut2">Heure de départ choisie</label>
-            <input type="time" id="boatOut2">
+            <article class="info-card">
+              <div class="info-icon">⚓</div>
+              <h3>Parking TPM</h3>
+              <p>
+                Parking Tour Fondue ouvert 24 h/24. Environ 670 places,
+                emplacements PMR et bornes électriques.
+              </p>
+              <div class="tariff"><strong>2 €</strong><span>1 h • 11,40 € pour 8 h</span></div>
+              <a class="source-link" target="_blank" rel="noopener"
+                 href="https://metropoletpm.fr/parking-tpm-tour-fondue-hyeres">
+                Tarifs TPM →
+              </a>
+            </article>
           </div>
-        </article>
+        </section>
 
-        <article class="card">
-          <h3>Retour</h3>
-          <p>Porquerolles → Tour Fondue</p>
-
-          <div class="field">
-            <label for="boatBack2">Heure de retour choisie</label>
-            <input type="time" id="boatBack2">
+        <section class="section" id="restaurants">
+          <div class="section-heading">
+            <div>
+              <span class="kicker">Une pause gourmande</span>
+              <h2>Restaurants à Porquerolles</h2>
+              <p>La réservation est vivement conseillée en haute saison.</p>
+            </div>
           </div>
-        </article>
-      </div>
 
-      <div class="notice">
-        Présentez-vous suffisamment tôt à l’embarcadère.
-        Les horaires affichés ici sont vos choix personnels, pas une confirmation TLV.
-      </div>
-
-      <div class="actions">
-        <a class="button" target="_blank"
-           href="https://www.tlv-tvm.com/iframe-horaires/?trajet=porquerolles">
-          Consulter les horaires officiels
-        </a>
-      </div>
-    </section>
-
-    <section class="page" id="parkings">
-      <div class="section-title">
-        <h2>Où garer la voiture ?</h2>
-        <p>Sélectionnez un parking. Les boutons ouvrent directement l’itinéraire.</p>
-      </div>
-
-      <div class="notice">
-        En période estivale, les parkings proches de l’embarcadère peuvent être rapidement complets.
-        Prévoyez une marge importante.
-      </div>
-
-      <div class="parking-grid" id="parkingGrid"></div>
-    </section>
-
-    <section class="page" id="journee">
-      <div class="section-title">
-        <h2>Le programme des Léon</h2>
-        <p>Votre programme se met à jour lorsque vous modifiez un horaire ou une visite.</p>
-      </div>
-
-      <article class="card">
-        <div id="daySummary"></div>
-      </article>
-
-      <div class="actions">
-        <button class="button" id="copyLink">🔗 Copier le lien du programme</button>
-        <button class="button whatsapp" id="shareWhatsapp">WhatsApp Web</button>
-        <button class="button secondary" id="shareEmail">Envoyer par e-mail</button>
-      </div>
-
-      <p class="small">
-        Le lien partagé contient vos choix. La personne qui l’ouvre retrouve donc votre programme.
-      </p>
-    </section>
-
-    <section class="page" id="pratique">
-      <div class="section-title">
-        <h2>Informations pratiques</h2>
-        <p>Quelques liens utiles à vérifier avant le départ.</p>
-      </div>
-
-      <div class="grid">
-        <article class="card">
-          <h3>🎒 Pense-bête</h3>
-          <ul class="parking-info">
-            <li>Eau, casquettes et crème solaire</li>
-            <li>Chaussures confortables</li>
-            <li>Maillots et serviettes</li>
-            <li>Billets de bateau</li>
-            <li>Batterie de téléphone chargée</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>🔎 Sources officielles</h3>
-
-          <div class="source-list">
-            <a class="source-link" target="_blank"
-               href="https://www.tlv-tvm.com/iframe-horaires/?trajet=porquerolles">
-              <strong>TLV-TVM</strong>
-              Horaires des traversées
-            </a>
-
-            <a class="source-link" target="_blank"
-               href="https://www.provencemed.com/hyeres-porquerolles/porquerolles/">
-              <strong>Office de tourisme</strong>
-              Découvrir Porquerolles
-            </a>
-
-            <a class="source-link" target="_blank"
-               href="https://www.tlv-tvm.com/parking-embarcadere/">
-              <strong>Parkings de l’embarcadère</strong>
-              Informations TLV
-            </a>
+          <div class="filters" id="restaurantFilters">
+            <button class="filter active" data-filter="all">Toutes les envies</button>
+            <button class="filter" data-filter="port">Sur le port</button>
+            <button class="filter" data-filter="plage">Les pieds dans l’eau</button>
+            <button class="filter" data-filter="raffine">Cuisine raffinée</button>
           </div>
-        </article>
+
+          <div class="cards" id="restaurantCards"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <span class="kicker">Votre idée personnelle</span>
+              <h2>Ajouter une activité</h2>
+              <p>Ajoutez un pique-nique, une baignade, une balade ou toute autre envie.</p>
+            </div>
+          </div>
+
+          <form class="panel custom-form" id="customForm">
+            <label>
+              Nom de l’activité
+              <input id="customTitle" required placeholder="Ex. Pique-nique">
+            </label>
+
+            <label>
+              Heure
+              <input id="customTime" required type="time" value="16:30">
+            </label>
+
+            <label>
+              Durée
+              <select id="customDuration">
+                <option value="30">30 min</option>
+                <option value="45">45 min</option>
+                <option value="60" selected>1 h</option>
+                <option value="90">1 h 30</option>
+                <option value="120">2 h</option>
+              </select>
+            </label>
+
+            <button class="button" type="submit">＋ Ajouter à ma journée</button>
+          </form>
+        </section>
       </div>
-    </section>
+
+      <aside class="planner" id="programme">
+        <div class="planner-header">
+          <small>Famille Léon</small>
+          <h2>Mon programme</h2>
+          <div class="save-status">
+            <span class="save-dot"></span>
+            Choix enregistrés automatiquement
+          </div>
+        </div>
+
+        <div class="timeline" id="timeline"></div>
+
+        <div class="budget">
+          <div class="budget-line"><span>Bateau ou pack vélo</span><strong id="transportBudget">0 €</strong></div>
+          <div class="budget-line"><span>Parking estimé</span><strong id="parkingBudget">0 €</strong></div>
+          <div class="budget-line"><span>Visites payantes</span><strong id="activityBudget">0 €</strong></div>
+          <div class="budget-total"><strong>Budget estimé</strong><strong id="totalBudget">0 €</strong></div>
+          <small style="display:block;margin-top:7px;color:#7a8585">
+            Hors restaurants, carburant et dépenses personnelles.
+          </small>
+        </div>
+
+        <div class="planner-actions">
+          <button class="button coral" onclick="copyShareLink()">🔗 Copier le lien</button>
+          <button class="button ghost small" onclick="shareWhatsApp()">WhatsApp Web</button>
+          <button class="button ghost small" onclick="shareEmail()">E-mail</button>
+          <button class="button ghost small" style="grid-column:1/-1" onclick="resetPlan()">Recommencer</button>
+        </div>
+      </aside>
+    </div>
   </main>
 
-  <footer>
-    Une escapade préparée avec ❤️ pour la famille Léon
-  </footer>
+  <dialog id="detailDialog">
+    <button class="close-modal" onclick="closeDialog()" aria-label="Fermer">×</button>
+    <img class="modal-photo" id="modalPhoto" alt="">
+    <div class="modal-content">
+      <span class="kicker" id="modalBadge"></span>
+      <h2 id="modalTitle"></h2>
+      <p class="modal-description" id="modalDescription"></p>
+      <div class="modal-facts" id="modalFacts"></div>
+      <div class="modal-actions">
+        <a class="button ghost" id="modalLink" target="_blank" rel="noopener">Informations officielles</a>
+        <button class="button" id="modalAdd">Ajouter au programme</button>
+      </div>
+    </div>
+  </dialog>
 
   <div class="toast" id="toast"></div>
 
+  <footer>
+    Page familiale indépendante — données pratiques à vérifier avant le départ.<br>
+    Sources principales :
+    <a href="https://www.tlv-tvm.com/" target="_blank" rel="noopener">TLV</a>,
+    <a href="https://www.provencemed.com/hyeres-porquerolles/porquerolles/" target="_blank" rel="noopener">Provence Méditerranée</a>
+    et sites officiels des établissements. Mise à jour indicative : septembre 2026.
+  </footer>
+
   <script>
-    const STORAGE_KEY = "famille-leon-porquerolles-v2";
+    const STORAGE_KEY = "famille-leon-porquerolles-wow-v1";
 
     const visits = [
       {
         id: "village",
-        name: "Village et port",
-        icon: "⛵",
-        description: "Flâner sur le port, découvrir les ruelles et l’ambiance du village.",
+        category: "patrimoine",
+        title: "Village et port",
+        badge: "Premiers pas",
+        description: "Flânerie autour du port, de la place d’Armes, des ruelles et des commerces.",
+        details: "Une découverte facile à faire dès l’arrivée. Le village concentre les loueurs de vélos, restaurants et principaux services.",
+        hours: "Accès libre toute l’année",
+        price: 0,
+        priceLabel: "Gratuit",
         duration: 60,
-        colors: ["#72d5df", "#087f8c"]
-      },
-      {
-        id: "notre-dame",
-        name: "Plage Notre-Dame",
-        icon: "🏖️",
-        description: "Une superbe plage aux eaux turquoise, accessible à pied ou à vélo.",
-        duration: 120,
-        colors: ["#ffe494", "#25b8bd"]
+        defaultTime: "09:30",
+        image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=85",
+        credit: "Photo d’ambiance : Unsplash",
+        link: "https://www.provencemed.com/hyeres-porquerolles/porquerolles/"
       },
       {
         id: "fort",
-        name: "Fort Sainte-Agathe",
-        icon: "🏰",
-        description: "Un monument historique avec un beau panorama sur l’île et la mer.",
-        duration: 75,
-        colors: ["#e9c188", "#8b6b4f"]
-      },
-      {
-        id: "moulin",
-        name: "Moulin du Bonheur",
-        icon: "🌾",
-        description: "Une promenade agréable près du village et du fort.",
+        category: "patrimoine",
+        title: "Fort Sainte-Agathe",
+        badge: "Vue panoramique",
+        description: "Un fort historique dominant le village avec une très belle vue sur l’île.",
+        details: "La visite libre dure environ 45 minutes. En 2026, l’ouverture annoncée est du 1er mai au 30 septembre, du mardi au samedi.",
+        hours: "Mar–sam : 10 h–13 h • dernière entrée 12 h 30",
+        price: 6,
+        priceLabel: "6 € adulte",
         duration: 45,
-        colors: ["#ffe19a", "#83b66e"]
+        defaultTime: "10:30",
+        image: "https://provence-med.media.tourinsoft.eu/upload/22816648-21929e6e76394a76ad29dcd980a5f574.jpg",
+        credit: "Photo : Provence Méditerranée",
+        link: "https://www.provencemed.com/activite/fort-sainte-agathe-4617650/"
       },
       {
         id: "carmignac",
-        name: "Fondation Carmignac",
-        icon: "🎨",
-        description: "Art contemporain au cœur d’un jardin méditerranéen.",
+        category: "art",
+        title: "Villa Carmignac",
+        badge: "Art contemporain",
+        description: "Un parcours artistique spectaculaire dans un jardin méditerranéen.",
+        details: "La Villa est située à environ dix minutes à pied du port. La réservation est recommandée car les entrées sont limitées par créneau.",
+        hours: "25 avril–1er novembre 2026 • mar–dim • fermé lundi",
+        price: 16,
+        priceLabel: "16 € adulte",
         duration: 120,
-        colors: ["#f4a6a1", "#7666bd"]
+        defaultTime: "14:30",
+        image: "https://www.fondationcarmignac.com/static/65ba5306a5755487b2307b0dc2cc8192/0ac74/La_Villa_Slide_Show_2.jpg",
+        credit: "Photo : Fondation Carmignac",
+        link: "https://www.fondationcarmignac.com/"
       },
       {
-        id: "cap",
-        name: "Cap des Mèdes",
-        icon: "🥾",
-        description: "Une sortie nature pour profiter des paysages sauvages de l’île.",
-        duration: 150,
-        colors: ["#7fcaa4", "#236b70"]
+        id: "notre-dame",
+        category: "plage",
+        title: "Plage Notre-Dame",
+        badge: "Coup de cœur",
+        description: "Eau turquoise, pinède et longue plage préservée au nord de l’île.",
+        details: "Notre-Dame est éloignée du village. Le vélo est conseillé. Prévoyez de l’eau et respectez les restrictions d’accès liées au risque d’incendie.",
+        hours: "Accès libre, sous réserve des restrictions estivales",
+        price: 0,
+        priceLabel: "Gratuit",
+        duration: 120,
+        defaultTime: "14:15",
+        image: "https://provence-med.media.tourinsoft.eu/upload/42245271.jpg",
+        credit: "Photo : Laurent Parienti",
+        link: "https://www.provencemed.com/hyeres-porquerolles/porquerolles/plages-de-porquerolles/"
+      },
+      {
+        id: "argent",
+        category: "plage",
+        title: "Plage d’Argent",
+        badge: "Facile en famille",
+        description: "Une plage claire facilement accessible depuis le village à pied ou à vélo.",
+        details: "La plage d’Argent se trouve à environ vingt minutes à pied ou dix minutes à vélo du village.",
+        hours: "Accès libre, sous réserve des restrictions estivales",
+        price: 0,
+        priceLabel: "Gratuit",
+        duration: 120,
+        defaultTime: "15:00",
+        image: "https://provence-med.media.tourinsoft.eu/upload/42245861.jpg",
+        credit: "Photo : Laurent Parienti",
+        link: "https://www.provencemed.com/hyeres-porquerolles/porquerolles/plages-de-porquerolles/"
+      },
+      {
+        id: "courtade",
+        category: "plage",
+        title: "Plage de la Courtade",
+        badge: "Proche du village",
+        description: "Grande plage bordée de pins, pratique pour une baignade sans long trajet.",
+        details: "La Courtade est l’une des plages les plus proches du village. Elle convient bien lorsque le programme est déjà chargé.",
+        hours: "Accès libre, sous réserve des restrictions estivales",
+        price: 0,
+        priceLabel: "Gratuit",
+        duration: 90,
+        defaultTime: "16:00",
+        image: "https://provence-med.media.tourinsoft.eu/upload/42241294.jpg",
+        credit: "Photo : Laurent Parienti",
+        link: "https://www.provencemed.com/hyeres-porquerolles/porquerolles/plages-de-porquerolles/"
+      },
+      {
+        id: "phare",
+        category: "nature",
+        title: "Point de vue du phare",
+        badge: "Grand paysage",
+        description: "Une belle balade vers la côte sud et les falaises de Porquerolles.",
+        details: "Le bâtiment et son enceinte sont fermés au public, mais le secteur extérieur et les points de vue restent accessibles selon les conditions.",
+        hours: "Extérieurs accessibles selon le risque incendie",
+        price: 0,
+        priceLabel: "Gratuit",
+        duration: 90,
+        defaultTime: "14:00",
+        image: "https://provence-med.media.tourinsoft.eu/upload/23935098.jpg",
+        credit: "Photo : Provence Méditerranée",
+        link: "https://www.provencemed.com/activite/le-phare-de-porquerolles-4749852/"
+      },
+      {
+        id: "langoustier",
+        category: "nature",
+        title: "Grand Langoustier",
+        badge: "Côté sauvage",
+        description: "Une escapade plus longue vers l’ouest, entre plages, pinède et paysages sauvages.",
+        details: "À privilégier avec un vélo et une journée peu chargée. Vérifiez les accès aux massifs en période de risque incendie.",
+        hours: "Accès libre selon les conditions du massif",
+        price: 0,
+        priceLabel: "Gratuit",
+        duration: 180,
+        defaultTime: "13:30",
+        image: "https://provence-med.media.tourinsoft.eu/upload/8637733.jpg",
+        credit: "Photo : Hyères Tourisme",
+        link: "https://www.provencemed.com/hyeres-porquerolles/porquerolles/plages-de-porquerolles/"
       }
     ];
 
-    const parkings = [
+    const restaurants = [
       {
-        id: "arromanches",
-        badge: "GRATUIT",
-        free: true,
-        name: "Parking-relais Arromanches",
-        address: "Rond-point Arromanches, route de l’Aéroport, 83400 Hyères",
-        details: [
-          "631 places gratuites",
-          "Puis bus 67 vers la Tour Fondue",
-          "Option conseillée pour éviter les parkings saturés"
-        ],
-        maps: "https://www.google.com/maps/search/?api=1&query=Parking+relais+Arromanches+Hyeres",
-        source: "https://www.provencemed.com/preparer-ma-venue/transport-et-acces/se-deplacer-sur-le-territoire/prendre-le-bus-67-vers-porquerolles/"
+        id: "pescatore",
+        category: "port",
+        title: "Il Pescatore",
+        badge: "Vue sur le port",
+        description: "Brasserie méditerranéenne, poissons, salades et cuisine provençale.",
+        details: "Situé à environ 100 mètres du débarcadère avec terrasse et vue panoramique sur le port.",
+        hours: "Septembre 2026 : tous les jours dès 7 h 30",
+        price: 0,
+        priceLabel: "Carte à consulter",
+        duration: 90,
+        defaultTime: "12:30",
+        image: "https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=1200&q=85",
+        credit: "Photo d’ambiance : Unsplash",
+        link: "https://ilpescatore-porquerolles.fr/"
       },
       {
-        id: "iles",
-        badge: "PAYANT",
-        name: "Parking des Îles",
-        address: "1852 avenue des Arbanais, La Tour Fondue, 83400 Hyères",
-        details: [
-          "À proximité de l’embarcadère",
-          "Ouvert toute l’année",
-          "Téléphone : 04 94 00 09 64"
-        ],
-        maps: "https://www.google.com/maps/search/?api=1&query=Parking+des+Iles+1852+avenue+des+Arbanais+Hyeres",
-        source: "https://www.tlv-tvm.com/parking-embarcadere/"
+        id: "plage-argent-restaurant",
+        category: "plage",
+        title: "La Plage d’Argent",
+        badge: "Les pieds dans l’eau",
+        description: "Déjeuner avec terrasse au bord de la plage d’Argent.",
+        details: "Comptez environ vingt minutes à pied ou dix minutes à vélo depuis le village. Réservation conseillée.",
+        hours: "Septembre 2026 : mar–dim, 9 h 30–17 h 30",
+        price: 0,
+        priceLabel: "Prix à consulter",
+        duration: 90,
+        defaultTime: "12:30",
+        image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=85",
+        credit: "Photo d’ambiance : Unsplash",
+        link: "https://www.provencemed.com/restaurant/la-plage-dargent-4616264/"
       },
       {
-        id: "tpm",
-        badge: "PAYANT",
-        name: "Parking TPM Tour Fondue",
-        address: "Avenue des Arbanais, La Tour Fondue, 83400 Hyères",
-        details: [
-          "Parking proche de l’embarcadère",
-          "Ouvert 7 jours sur 7 et 24 heures sur 24",
-          "Téléphone : 04 94 93 38 00"
-        ],
-        maps: "https://www.google.com/maps/search/?api=1&query=Parking+TPM+Tour+Fondue+Hyeres",
-        source: "https://metropoletpm.fr/parking-tpm-tour-fondue-hyeres"
+        id: "poisson-ivre",
+        category: "raffine",
+        title: "Le Poisson Ivre",
+        badge: "Jardin Carmignac",
+        description: "Cuisine locale et raffinée au cœur du jardin de la Villa Carmignac.",
+        details: "L’accès au restaurant nécessite un billet d’entrée pour la Villa Carmignac. Service du déjeuner jusqu’à 14 h 30.",
+        hours: "25 avril–1er novembre 2026 • mar–dim",
+        price: 0,
+        priceLabel: "Prix à consulter",
+        duration: 90,
+        defaultTime: "12:30",
+        image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85",
+        credit: "Photo d’ambiance : Unsplash",
+        link: "https://www.provencemed.com/restaurant/le-poisson-ivre-6111710/"
       },
       {
-        id: "porquerolles",
-        badge: "PAYANT",
-        name: "Parking Porquerolles",
-        address: "1800 avenue des Arbanais, La Tour Fondue, 83400 Hyères",
-        details: [
-          "À proximité de l’embarcadère",
-          "Ouverture saisonnière à vérifier",
-          "Téléphone : 04 94 61 16 65"
-        ],
-        maps: "https://www.google.com/maps/search/?api=1&query=Parking+Porquerolles+1800+avenue+des+Arbanais+Hyeres",
-        source: "https://www.provencemed.com/commerce/parking-porquerolles-4678033/"
+        id: "escale",
+        category: "port",
+        title: "L’Escale",
+        badge: "Port et cocktails",
+        description: "Restaurant-bar au centre du village avec vue mer, tapas et cocktails.",
+        details: "Une adresse pratique près du port, adaptée à un déjeuner ou à une pause avant le bateau retour.",
+        hours: "Mai–septembre : tous les jours, 9 h–0 h 30",
+        price: 0,
+        priceLabel: "Carte à consulter",
+        duration: 90,
+        defaultTime: "12:45",
+        image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=85",
+        credit: "Photo d’ambiance : Unsplash",
+        link: "https://www.lescale-porquerolles.fr/"
       }
     ];
 
-    const defaults = {
-      tripDate: "",
+    const defaultState = {
+      date: "",
       people: 6,
-      drive: 105,
-      margin: 45,
-      boatOut: "09:00",
-      boatBack: "18:00",
+      startPlace: "Roquebrune-sur-Argens",
+      depart: "06:30",
+      travelMinutes: 105,
+      ferryOut: "09:00",
+      ferryBack: "18:00",
+      boatPrice: 24,
       parking: "arromanches",
-      visits: {
-        village: { checked: true, time: "09:4040", duration: 60 },
-        "notre-dame": { checked: true, time: "11:00", duration: 120 },
-        fort: { checked: true, time: "14:30", duration: 75 }
-      }
+      bike: "none",
+      program: [
+        {
+          uid: "default-fort",
+          sourceId: "fort",
+          sourceType: "visit",
+          title: "Fort Sainte-Agathe",
+          time: "10:30",
+          duration: 45,
+          price: 6
+        },
+        {
+          uid: "default-pescatore",
+          sourceId: "pescatore",
+          sourceType: "restaurant",
+          title: "Déjeuner — Il Pescatore",
+          time: "12:30",
+          duration: 90,
+          price: 0
+        },
+        {
+          uid: "default-notredame",
+          sourceId: "notre-dame",
+          sourceType: "visit",
+          title: "Plage Notre-Dame",
+          time: "14:15",
+          duration: 120,
+          price: 0
+        }
+      ]
     };
 
-    function readSharedState() {
-      if (!location.hash.startsWith("#programme=")) return null;
+    let state = loadState();
+    let visitFilter = "all";
+    let restaurantFilter = "all";
+    let currentModal = null;
 
-      try {
-        const encoded = location.hash.replace("#programme=", "");
-        return JSON.parse(decodeURIComponent(escape(atob(encoded))));
-      } catch {
-        return null;
-      }
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
     }
 
     function loadState() {
-      let saved = null;
+      const shared = readSharedPlan();
+      if (shared) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(shared));
+        return shared;
+      }
 
       try {
-        saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      } catch {}
-
-      const shared = readSharedState();
-      const imported = shared || saved || {};
-
-      return {
-        ...defaults,
-        ...imported,
-        visits: {
-          ...defaults.visits,
-          ...(imported.visits || {})
-        }
-      };
-    }
-
-    let state = loadState();
-
-    visits.forEach(visit => {
-      const current = state.visits[visit.id];
-
-      if (!current || typeof current !== "object") {
-        state.visits[visit.id] = {
-          checked: false,
-          time: "",
-          duration: visit.duration
-        };
-      } else {
-        state.visits[visit.id] = {
-          checked: Boolean(current.checked),
-          time: current.time || "",
-          duration: Number(current.duration) || visit.duration
-        };
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return saved ? { ...clone(defaultState), ...saved } : clone(defaultState);
+      } catch {
+        return clone(defaultState);
       }
-    });
+    }
 
     function saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      renderSummary();
+      renderAll();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function minutes(time) {
+      if (!/^\d{2}:\d{2}$/.test(time || "")) return 9999;
+      const [h, m] = time.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    function addMinutes(time, amount) {
+      let total = minutes(time);
+      if (total === 9999) return "--:--";
+      total = (total + Number(amount) + 1440) % 1440;
+      return String(Math.floor(total / 60)).padStart(2, "0") + ":" +
+             String(total % 60).padStart(2, "0");
+    }
+
+    function durationLabel(value) {
+      const min = Number(value);
+      if (min < 60) return min + " min";
+      const hours = Math.floor(min / 60);
+      const rest = min % 60;
+      return rest ? hours + " h " + rest : hours + " h";
+    }
+
+    function money(value) {
+      return new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+        maximumFractionDigits: 2
+      }).format(value || 0);
+    }
+
+    function isAdded(type, id) {
+      return state.program.some(item => item.sourceType === type && item.sourceId === id);
+    }
+
+    function renderCards(data, containerId, type, filter) {
+      const container = document.getElementById(containerId);
+      const visible = filter === "all" ? data : data.filter(item => item.category === filter);
+
+      container.innerHTML = visible.map(item => {
+        const added = isAdded(type, item.id);
+        return `
+          <article class="experience-card">
+            <div class="photo">
+              <img src="${item.image}" alt="${escapeHtml(item.title)}"
+                   onerror="this.style.display='none'">
+              <span class="badge">${escapeHtml(item.badge)}</span>
+              <span class="credit">${escapeHtml(item.credit)}</span>
+            </div>
+
+            <div class="card-body">
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.description)}</p>
+
+              <div class="meta-list">
+                <span class="meta">🕒 ${durationLabel(item.duration)}</span>
+                <span class="meta price">${escapeHtml(item.priceLabel)}</span>
+              </div>
+
+              <div class="card-actions">
+                <button class="button ghost small"
+                        onclick="openDetails('${type}','${item.id}')">
+                  Détails
+                </button>
+
+                <button class="button small"
+                        ${added ? "disabled" : ""}
+                        onclick="addItem('${type}','${item.id}')">
+                  ${added ? "✓ Ajouté" : "＋ Ajouter"}
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderVisits() {
+      renderCards(visits, "visitCards", "visit", visitFilter);
+    }
+
+    function renderRestaurants() {
+      renderCards(restaurants, "restaurantCards", "restaurant", restaurantFilter);
+    }
+
+    function getItem(type, id) {
+      return (type === "visit" ? visits : restaurants).find(item => item.id === id);
+    }
+
+    function addItem(type, id) {
+      if (isAdded(type, id)) return;
+
+      const source = getItem(type, id);
+      state.program.push({
+        uid: type + "-" + id + "-" + Date.now(),
+        sourceId: id,
+        sourceType: type,
+        title: type === "restaurant" ? "Déjeuner — " + source.title : source.title,
+        time: source.defaultTime,
+        duration: source.duration,
+        price: source.price
+      });
+
+      saveState();
+      closeDialog();
+      showToast(source.title + " ajouté à votre journée");
+    }
+
+    function removeItem(uid) {
+      state.program = state.program.filter(item => item.uid !== uid);
+      saveState();
+    }
+
+    function updateProgram(uid, field, value) {
+      const item = state.program.find(element => element.uid === uid);
+      if (!item) return;
+
+      item[field] = field === "price" ? Math.max(0, Number(value) || 0) : value;
+      saveState();
+    }
+
+    function fixedSchedule() {
+      const arrivalParking = addMinutes(state.depart, state.travelMinutes);
+      const islandArrival = addMinutes(state.ferryOut, 20);
+      const carReturn = addMinutes(state.ferryBack, 20);
+      const homeArrival = addMinutes(state.ferryBack, 20 + Number(state.travelMinutes));
+
+      return [
+        {
+          fixed: true,
+          title: "Départ de " + state.startPlace,
+          time: state.depart,
+          duration: state.travelMinutes,
+          subtitle: "Trajet prévu : " + durationLabel(state.travelMinutes)
+        },
+        {
+          fixed: true,
+          title: "Arrivée près de la Tour Fondue",
+          time: arrivalParking,
+          duration: 0,
+          subtitle: parkingName()
+        },
+        {
+          fixed: true,
+          title: "Navette aller",
+          time: state.ferryOut,
+          duration: 20,
+          subtitle: "Tour Fondue → Porquerolles"
+        },
+        {
+          fixed: true,
+          title: "Arrivée sur l’île",
+          time: islandArrival,
+          duration: 0,
+          subtitle: "Début de l’escapade"
+        },
+        {
+          fixed: true,
+          title: "Navette retour",
+          time: state.ferryBack,
+          duration: 20,
+          subtitle: "Porquerolles → Tour Fondue"
+        },
+        {
+          fixed: true,
+          title: "Retour estimé à la maison",
+          time: homeArrival,
+          duration: 0,
+          subtitle: "Selon la circulation"
+        }
+      ];
+    }
+
+    function parkingName() {
+      if (state.parking === "iles") return "Parking des Îles";
+      if (state.parking === "tpm") return "Parking TPM Tour Fondue";
+      return "P+R Arromanches + ligne 67";
+    }
+
+    function renderTimeline() {
+      const timeline = [...fixedSchedule(), ...state.program]
+        .sort((a, b) => minutes(a.time) - minutes(b.time));
+
+      const container = document.getElementById("timeline");
+
+      container.innerHTML = timeline.map(item => `
+        <div class="timeline-item">
+          <div class="timeline-time">${escapeHtml(item.time)}</div>
+
+          <div class="timeline-box">
+            <strong>${escapeHtml(item.title)}</strong>
+            <span>
+              ${item.subtitle
+                ? escapeHtml(item.subtitle)
+                : durationLabel(item.duration)}
+            </span>
+
+            ${item.fixed ? "" : `
+              <div class="timeline-controls">
+                <input type="time"
+                       value="${escapeHtml(item.time)}"
+                       title="Modifier l’heure"
+                       onchange="updateProgram('${item.uid}','time',this.value)">
+
+                <input type="number"
+                       min="0"
+                       step=".5"
+                       value="${Number(item.price) || 0}"
+                       title="Prix par personne"
+                       onchange="updateProgram('${item.uid}','price',this.value)">
+
+                <button class="remove"
+                        title="Retirer"
+                        onclick="removeItem('${item.uid}')">×</button>
+              </div>
+            `}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function parkingEstimate() {
+      const arrival = minutes(addMinutes(state.depart, state.travelMinutes));
+      const departure = minutes(addMinutes(state.ferryBack, 20));
+      let hours = Math.max(0, (departure - arrival) / 60);
+
+      if (state.parking === "arromanches") return 0;
+      if (state.parking === "iles") return Math.min(21, hours * 2.4);
+
+      const table = [
+        [0, 0], [1, 2], [2, 3.6], [4, 6.6], [8, 11.4],
+        [10, 13.8], [12, 20], [24, 25]
+      ];
+
+      for (let i = 1; i < table.length; i++) {
+        if (hours <= table[i][0]) {
+          const [h1, p1] = table[i - 1];
+          const [h2, p2] = table[i];
+          return p1 + ((hours - h1) / (h2 - h1)) * (p2 - p1);
+        }
+      }
+
+      return 25;
+    }
+
+    function renderBudget() {
+      const people = Math.max(1, Number(state.people) || 1);
+
+      let transport;
+      if (state.bike === "classic") transport = people * 39;
+      else if (state.bike === "electric") transport = people * 64;
+      else transport = people * Math.max(0, Number(state.boatPrice) || 0);
+
+      const parking = parkingEstimate();
+      const activities = state.program.reduce(
+        (total, item) => total + (Number(item.price) || 0) * people,
+        0
+      );
+
+      document.getElementById("transportBudget").textContent = money(transport);
+      document.getElementById("parkingBudget").textContent = money(parking);
+      document.getElementById("activityBudget").textContent = money(activities);
+      document.getElementById("totalBudget").textContent =
+        money(transport + parking + activities);
+    }
+
+    function renderSettings() {
+      [
+        "date", "people", "startPlace", "depart", "travelMinutes",
+        "ferryOut", "ferryBack", "boatPrice", "parking"
+      ].forEach(id => {
+        document.getElementById(id).value = state[id];
+      });
+    }
+
+    function renderAll() {
+      renderSettings();
+      renderVisits();
+      renderRestaurants();
+      renderTimeline();
+      renderBudget();
+    }
+
+    function setBike(option) {
+      state.bike = state.bike === option ? "none" : option;
+      saveState();
+
+      const label =
+        state.bike === "classic" ? "Pack VTT classique sélectionné" :
+        state.bike === "electric" ? "Pack VTT électrique sélectionné" :
+        "Option vélo retirée";
+
+      showToast(label);
+    }
+
+    function openDetails(type, id) {
+      const item = getItem(type, id);
+      currentModal = { type, id };
+
+      document.getElementById("modalPhoto").src = item.image;
+      document.getElementById("modalPhoto").alt = item.title;
+      document.getElementById("modalBadge").textContent = item.badge;
+      document.getElementById("modalTitle").textContent = item.title;
+      document.getElementById("modalDescription").textContent = item.details;
+
+      document.getElementById("modalFacts").innerHTML = `
+        <div class="modal-fact"><strong>🕒 Horaires :</strong> ${escapeHtml(item.hours)}</div>
+        <div class="modal-fact"><strong>💶 Tarif :</strong> ${escapeHtml(item.priceLabel)}</div>
+        <div class="modal-fact"><strong>⌛ Durée conseillée :</strong> ${durationLabel(item.duration)}</div>
+      `;
+
+      document.getElementById("modalLink").href = item.link;
+
+      const addButton = document.getElementById("modalAdd");
+      const added = isAdded(type, id);
+      addButton.disabled = added;
+      addButton.textContent = added ? "✓ Déjà ajouté" : "＋ Ajouter au programme";
+      addButton.onclick = () => addItem(type, id);
+
+      document.getElementById("detailDialog").showModal();
+    }
+
+    function closeDialog() {
+      document.getElementById("detailDialog").close();
     }
 
     function showToast(message) {
       const toast = document.getElementById("toast");
       toast.textContent = message;
       toast.classList.add("show");
-
-      clearTimeout(showToast.timer);
-      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => toast.classList.remove("show"), 2700);
     }
 
-    function openTab(tabName) {
-      document.querySelectorAll(".tab").forEach(button => {
-        button.classList.toggle("active", button.dataset.tab === tabName);
-      });
-
-      document.querySelectorAll(".page").forEach(page => {
-        page.classList.toggle("active", page.id === tabName);
-      });
-
-      window.scrollTo({ top: document.querySelector(".tabs-wrap").offsetTop, behavior: "smooth" });
+    function encodePlan(value) {
+      return btoa(unescape(encodeURIComponent(JSON.stringify(value))));
     }
 
-    function renderVisits() {
-      const grid = document.getElementById("visitGrid");
-
-      grid.innerHTML = visits.map(visit => {
-        const selected = state.visits[visit.id];
-
-        return `
-          <article class="card visit-card ${selected.checked ? "selected" : ""}">
-            <div class="visit-art"
-                 style="--c1:${visit.colors[0]};--c2:${visit.colors[1]}">
-              <span>${visit.icon}</span>
-            </div>
-
-            <div class="visit-content">
-              <div class="visit-head">
-                <input type="checkbox"
-                       data-visit-check="${visit.id}"
-                       ${selected.checked ? "checked" : ""}>
-
-                <div>
-                  <h3>${visit.name}</h3>
-                  <p>${visit.description}</p>
-                </div>
-              </div>
-
-              <div class="visit-settings">
-                <div class="field">
-                  <label>Heure prévue</label>
-                  <input type="time"
-                         data-visit-time="${visit.id}"
-                         value="${selected.time}">
-                </div>
-
-                <div class="field">
-                  <label>Durée</label>
-                  <select data-visit-duration="${visit.id}">
-                    ${[30,45,60,75,90,120,150,180].map(duration => `
-                      <option value="${duration}"
-                        ${selected.duration === duration ? "selected" : ""}>
-                        ${formatDuration(duration)}
-                      </option>
-                    `).join("")}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </article>
-        `;
-      }).join("");
-
-      document.querySelectorAll("[data-visit-check]").forEach(input => {
-        input.addEventListener("change", event => {
-          state.visits[event.target.dataset.visitCheck].checked = event.target.checked;
-          saveState();
-          renderVisits();
-        });
-      });
-
-      document.querySelectorAll("[data-visit-time]").forEach(input => {
-        input.addEventListener("change", event => {
-          state.visits[event.target.dataset.visitTime].time = event.target.value;
-          saveState();
-        });
-      });
-
-      document.querySelectorAll("[data-visit-duration]").forEach(select => {
-        select.addEventListener("change", event => {
-          state.visits[event.target.dataset.visitDuration].duration =
-            Number(event.target.value);
-          saveState();
-        });
-      });
+    function decodePlan(value) {
+      return JSON.parse(decodeURIComponent(escape(atob(value))));
     }
 
-    function renderParkings() {
-      const grid = document.getElementById("parkingGrid");
+    function readSharedPlan() {
+      if (!location.hash.startsWith("#plan=")) return null;
 
-      grid.innerHTML = parkings.map(parking => `
-        <article class="card parking-card ${state.parking === parking.id ? "selected" : ""}"
-                 data-parking-card="${parking.id}">
-
-          <span class="badge ${parking.free ? "free" : ""}">${parking.badge}</span>
-
-          <input type="radio"
-                 name="parking"
-                 value="${parking.id}"
-                 ${state.parking === parking.id ? "checked" : ""}>
-
-          <h3>${parking.name}</h3>
-          <p class="address">📍 ${parking.address}</p>
-
-          <ul class="parking-info">
-            ${parking.details.map(detail => `<li>${detail}</li>`).join("")}
-          </ul>
-
-          <div class="actions">
-            <a class="button" href="${parking.maps}" target="_blank">Itinéraire</a>
-            <a class="button secondary" href="${parking.source}" target="_blank">Informations</a>
-          </div>
-        </article>
-      `).join("");
-
-      document.querySelectorAll("[data-parking-card]").forEach(card => {
-        card.addEventListener("click", event => {
-          if (event.target.closest("a")) return;
-
-          state.parking = card.dataset.parkingCard;
-          saveState();
-          renderParkings();
-        });
-      });
-    }
-
-    function formatDuration(minutes) {
-      if (minutes < 60) return `${minutes} min`;
-
-      const hours = Math.floor(minutes / 60);
-      const remaining = minutes % 60;
-
-      return remaining ? `${hours} h ${remaining}` : `${hours} h`;
-    }
-
-    function toMinutes(time) {
-      if (!time) return null;
-      const [hours, minutes] = time.split(":").map(Number);
-      return hours * 60 + minutes;
-    }
-
-    function toTime(totalMinutes) {
-      const value = ((totalMinutes % 1440) + 1440) % 1440;
-      const hours = Math.floor(value / 60).toString().padStart(2, "0");
-      const minutes = (value % 60).toString().padStart(2, "0");
-      return `${hours}:${minutes}`;
-    }
-
-    function autoPlan() {
-      const selected = visits.filter(visit => state.visits[visit.id].checked);
-
-      if (!selected.length) {
-        showToast("Cochez d’abord au moins une visite.");
-        return;
+      try {
+        return { ...clone(defaultState), ...decodePlan(location.hash.slice(6)) };
+      } catch {
+        return null;
       }
-
-      let current = toMinutes(state.boatOut) + 35;
-
-      selected.forEach(visit => {
-        const duration = state.visits[visit.id].duration || visit.duration;
-
-        if (current >= 720 && current < 795) current = 795;
-
-        state.visits[visit.id].time = toTime(current);
-        current += duration + 15;
-      });
-
-      saveState();
-      renderVisits();
-      openTab("journee");
-      showToast("Les horaires ont été organisés.");
     }
 
-    function renderSummary() {
-      const selectedParking =
-        parkings.find(parking => parking.id === state.parking) || parkings[0];
-
-      const events = [];
-      const outbound = toMinutes(state.boatOut);
-      const inbound = toMinutes(state.boatBack);
-
-      if (outbound !== null) {
-        events.push({
-          time: outbound - Number(state.drive) - Number(state.margin),
-          title: "Départ de Roquebrune-sur-Argens",
-          text: `Trajet prévu : ${formatDuration(Number(state.drive))}`
-        });
-
-        events.push({
-          time: outbound - Number(state.margin),
-          title: "Arrivée conseillée à la Tour Fondue",
-          text: selectedParking.name
-        });
-
-        events.push({
-          time: outbound,
-          title: "Départ de la navette",
-          text: "Tour Fondue → Porquerolles"
-        });
-
-        events.push({
-          time: outbound + 20,
-          title: "Arrivée à Porquerolles",
-          text: "Début de l’escapade"
-        });
-      }
-
-      visits.forEach(visit => {
-        const choice = state.visits[visit.id];
-
-        if (choice.checked && choice.time) {
-          events.push({
-            time: toMinutes(choice.time),
-            title: visit.name,
-            text: `Durée prévue : ${formatDuration(choice.duration)}`
-          });
-        }
-      });
-
-      if (inbound !== null) {
-        events.push({
-          time: inbound - 30,
-          title: "Retour conseillé à l’embarcadère",
-          text: "Prévoir une marge avant le bateau"
-        });
-
-        events.push({
-          time: inbound,
-          title: "Navette retour",
-          text: "Porquerolles → Tour Fondue"
-        });
-
-        events.push({
-          time: inbound + 20 + Number(state.drive),
-          title: "Retour estimé à Roquebrune-sur-Argens",
-          text: "Selon la circulation"
-        });
-      }
-
-      events.sort((a, b) => a.time - b.time);
-
-      const container = document.getElementById("daySummary");
-      if (!container) return;
-
-      const dateText = state.tripDate
-        ? new Date(state.tripDate + "T12:00:00").toLocaleDateString("fr-FR", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-          })
-        : "Date à choisir";
-
-      container.innerHTML = `
-        <h3>${dateText}</h3>
-        <p>
-          👨‍👩‍👧‍👦 ${state.people} personne${Number(state.people) > 1 ? "s" : ""}
-          · 🅿️ ${selectedParking.name}
-        </p>
-
-        <div class="timeline">
-          ${events.map(event => `
-            <div class="timeline-item">
-              <div class="timeline-time">${toTime(event.time)}</div>
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <strong>${event.title}</strong>
-                <span>${event.text}</span>
-              </div>
-            </div>
-          `).join("")}
-        </div>
-      `;
+    function shareUrl() {
+      return location.origin + location.pathname + "#plan=" + encodePlan(state);
     }
 
-    function createShareUrl() {
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
-      return `${location.origin}${location.pathname}#programme=${encoded}`;
-    }
-
-    function createText() {
-      const selectedParking =
-        parkings.find(parking => parking.id === state.parking) || parkings[0];
-
-      const selectedVisits = visits
-        .filter(visit => state.visits[visit.id].checked)
-        .map(visit => {
-          const choice = state.visits[visit.id];
-          return `• ${choice.time || "heure à choisir"} : ${visit.name}`;
-        })
-        .join("\n");
-
-      return `☀️ Journée des Léon à Porquerolles
-
-📅 Date : ${state.tripDate || "à choisir"}
-👨‍👩‍👧‍👦 Participants : ${state.people}
-⛴️ Aller : ${state.boatOut}
-⛴️ Retour : ${state.boatBack}
-🅿️ Parking : ${selectedParking.name}
-
-${selectedVisits}
-
-Programme interactif :
-${createShareUrl()}`;
-    }
-
-    async function copyProgramLink() {
-      const url = createShareUrl();
+    async function copyShareLink() {
+      const url = shareUrl();
 
       try {
         await navigator.clipboard.writeText(url);
-        showToast("Lien copié ! Vous pouvez maintenant le coller.");
+        showToast("Lien copié : vous pouvez maintenant le coller");
       } catch {
         window.prompt("Copiez ce lien :", url);
       }
     }
 
-    function bindInputs() {
-      const fields = ["tripDate", "people", "drive", "margin", "boatOut"];
-
-      fields.forEach(id => {
-        document.getElementById(id).addEventListener("change", event => {
-          state[id] = event.target.type === "number"
-            ? Number(event.target.value)
-            : event.target.value;
-
-          if (id === "boatOut") {
-            document.getElementById("boatOut2").value = event.target.value;
-          }
-
-          saveState();
-        });
-      });
-
-      document.getElementById("boatBack").addEventListener("change", event => {
-        state.boatBack = event.target.value;
-        document.getElementById("boatBack2").value = event.target.value;
-        saveState();
-      });
-
-      document.getElementById("boatOut2").addEventListener("change", event => {
-        state.boatOut = event.target.value;
-        document.getElementById("boatOut").value = event.target.value;
-        saveState();
-      });
-
-      document.getElementById("boatBack2").addEventListener("change", event => {
-        state.boatBack = event.target.value;
-        document.getElementById("boatBack").value = event.target.value;
-        saveState();
-      });
+    function shareWhatsApp() {
+      const text = "Voici notre programme pour Porquerolles — famille Léon : " + shareUrl();
+      window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank", "noopener");
     }
 
-    function fillFields() {
-      ["tripDate", "people", "drive", "margin", "boatOut", "boatBack"].forEach(id => {
-        document.getElementById(id).value = state[id];
-      });
+    function shareEmail() {
+      const subject = "Notre journée à Porquerolles";
+      const body = "Voici le programme de la famille Léon :\n\n" + shareUrl();
 
-      document.getElementById("boatOut2").value = state.boatOut;
-      document.getElementById("boatBack2").value = state.boatBack;
-    }
-
-    document.querySelectorAll(".tab").forEach(button => {
-      button.addEventListener("click", () => openTab(button.dataset.tab));
-    });
-
-    document.querySelectorAll("[data-open]").forEach(button => {
-      button.addEventListener("click", () => openTab(button.dataset.open));
-    });
-
-    document.getElementById("goVisits").addEventListener("click", () => openTab("visites"));
-    document.getElementById("autoPlan").addEventListener("click", autoPlan);
-    document.getElementById("copyLink").addEventListener("click", copyProgramLink);
-
-    document.getElementById("shareWhatsapp").addEventListener("click", () => {
-      window.open(
-        `https://web.whatsapp.com/send?text=${encodeURIComponent(createText())}`,
-        "_blank"
-      );
-    });
-
-    document.getElementById("shareEmail").addEventListener("click", () => {
       location.href =
-        `mailto:?subject=${encodeURIComponent("Journée des Léon à Porquerolles")}` +
-        `&body=${encodeURIComponent(createText())}`;
+        "mailto:?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+    }
+
+    function resetPlan() {
+      if (!confirm("Effacer vos choix et remettre le programme de départ ?")) return;
+
+      state = clone(defaultState);
+      history.replaceState(null, "", location.pathname);
+      localStorage.removeItem(STORAGE_KEY);
+      saveState();
+      showToast("Programme réinitialisé");
+    }
+
+    document.querySelectorAll("#visitFilters .filter").forEach(button => {
+      button.addEventListener("click", () => {
+        visitFilter = button.dataset.filter;
+        document.querySelectorAll("#visitFilters .filter")
+          .forEach(item => item.classList.toggle("active", item === button));
+        renderVisits();
+      });
     });
 
-    fillFields();
-    bindInputs();
-    renderVisits();
-    renderParkings();
-    renderSummary();
-    saveState();
+    document.querySelectorAll("#restaurantFilters .filter").forEach(button => {
+      button.addEventListener("click", () => {
+        restaurantFilter = button.dataset.filter;
+        document.querySelectorAll("#restaurantFilters .filter")
+          .forEach(item => item.classList.toggle("active", item === button));
+        renderRestaurants();
+      });
+    });
 
-    if (location.hash.startsWith("#programme=")) {
-      showToast("Le programme partagé a bien été chargé.");
-    }
+    [
+      "date", "people", "startPlace", "depart", "travelMinutes",
+      "ferryOut", "ferryBack", "boatPrice", "parking"
+    ].forEach(id => {
+      document.getElementById(id).addEventListener("change", event => {
+        const numeric = ["people", "travelMinutes", "boatPrice"].includes(id);
+        state[id] = numeric ? Number(event.target.value) : event.target.value;
+        saveState();
+      });
+    });
+
+    document.getElementById("customForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const title = document.getElementById("customTitle").value.trim();
+      if (!title) return;
+
+      state.program.push({
+        uid: "custom-" + Date.now(),
+        sourceId: "",
+        sourceType: "custom",
+        title,
+        time: document.getElementById("customTime").value,
+        duration: Number(document.getElementById("customDuration").value),
+        price: 0
+      });
+
+      document.getElementById("customTitle").value = "";
+      saveState();
+      showToast("Activité personnelle ajoutée");
+    });
+
+    document.getElementById("detailDialog").addEventListener("click", event => {
+      if (event.target === event.currentTarget) closeDialog();
+    });
+
+    renderAll();
   </script>
 </body>
 </html>
