@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087f8c">
+<title>Les Léon à Porquerolles</title>
+
+<style>
+:root{
+  --sea:#07858f;
+  --deep:#075985;
+  --sky:#dff7fb;
+  --sand:#fff7e6;
+  --sun:#f5ad18;
+  --coral:#f97360;
+  --ink:#17324d;
+  --muted:#607585;
+  --white:#fff;
+  --green:#2f855a;
+  --shadow:0 12px 35px rgba(7,89,133,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:linear-gradient(180deg,var(--sky),var(--sand) 42%,#f5fbf9);
+  font-family:Arial,Helvetica,sans-serif;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:var(--deep)}
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:38px 20px 78px;
+  color:white;
+  background:
+    radial-gradient(circle at 84% 18%,#ffd166 0 40px,transparent 42px),
+    linear-gradient(145deg,#075985,#0797a6 58%,#17a997);
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  left:-5%;right:-5%;bottom:-58px;
+  height:100px;
+  border-radius:50% 50% 0 0;
+  background:var(--sand);
+}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:auto}
+.eyebrow{
+  display:inline-block;
+  padding:7px 12px;
+  border:1px solid #ffffff70;
+  border-radius:999px;
+  background:#ffffff18;
+  font-size:.82rem;
+  font-weight:bold;
+  text-transform:uppercase;
+}
+h1{
+  max-width:750px;
+  margin:16px 0 9px;
+  font-family:Georgia,serif;
+  font-size:clamp(2.4rem,7vw,4.8rem);
+  line-height:1;
+}
+.subtitle{max-width:680px;font-size:1.08rem;line-height:1.6}
+.hero-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pill{
+  padding:9px 13px;
+  border-radius:999px;
+  color:var(--deep);
+  background:white;
+  box-shadow:var(--shadow);
+  font-weight:bold;
+}
+.shell{position:relative;z-index:2;max-width:1100px;margin:-38px auto 70px;padding:0 15px}
+.tabs{
+  position:sticky;
+  top:8px;
+  z-index:20;
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  padding:8px;
+  border:1px solid #d9e8ea;
+  border-radius:20px;
+  background:#fffffff2;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
+}
+.tab{
+  flex:1;
+  min-width:max-content;
+  padding:12px 15px;
+  border:0;
+  border-radius:14px;
+  color:#4e6879;
+  background:transparent;
+  font-weight:bold;
+}
+.tab.active{color:white;background:var(--sea)}
+.page{display:none;padding-top:20px}
+.page.active{display:block}
+.panel{
+  margin-bottom:17px;
+  padding:22px;
+  border:1px solid #ddebea;
+  border-radius:23px;
+  background:#fffffff2;
+  box-shadow:var(--shadow);
+}
+.panel h2{
+  margin-top:0;
+  font-family:Georgia,serif;
+  font-size:1.85rem;
+}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.field label{display:block;margin-bottom:7px;font-size:.88rem;font-weight:bold}
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #b9d2d5;
+  border-radius:12px;
+  color:var(--ink);
+  background:white;
+}
+input:focus,select:focus,textarea:focus{
+  outline:3px solid #0ea5a430;
+  border-color:var(--sea);
+}
+.notice{
+  padding:14px 16px;
+  border-left:5px solid var(--sun);
+  border-radius:12px;
+  background:#fff6d8;
+  line-height:1.55;
+}
+.hint{color:var(--muted);font-size:.88rem;line-height:1.5}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{
+  display:inline-block;
+  padding:12px 16px;
+  border:0;
+  border-radius:13px;
+  color:white;
+  background:var(--sea);
+  box-shadow:0 7px 18px #087f8c32;
+  text-decoration:none;
+  font-weight:bold;
+}
+.btn.sun{background:var(--sun);color:#3f3100}
+.btn.secondary{
+  border:1px solid #bcd7d8;
+  color:var(--sea);
+  background:white;
+  box-shadow:none;
+}
+.btn.red{color:#aa2a22;background:#fff0ee;box-shadow:none}
+.saved{color:var(--green);font-size:.88rem;font-weight:bold}
+.activities{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.activity{
+  padding:17px;
+  border:2px solid transparent;
+  border-radius:19px;
+  background:white;
+  box-shadow:var(--shadow);
+  transition:.18s;
+}
+.activity:hover{transform:translateY(-2px)}
+.activity.chosen{border-color:#0aa1a0;background:#f3fffc}
+.activity-top{display:flex;gap:11px;align-items:flex-start}
+.activity-check{
+  width:23px;
+  height:23px;
+  margin:3px 0 0;
+  accent-color:var(--sea);
+}
+.icon{font-size:1.8rem}
+.activity h3{margin:0 0 5px;font-size:1.08rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.tag{
+  padding:5px 8px;
+  border-radius:999px;
+  background:#e6f7f4;
+  font-size:.75rem;
+  font-weight:bold;
+}
+.activity-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:13px;
+}
+details{margin-top:11px}
+summary{cursor:pointer;color:var(--sea);font-weight:bold}
+details p{color:var(--muted);line-height:1.5}
+.boat-times{display:flex;flex-wrap:wrap;gap:8px;margin:11px 0 18px}
+.time-chip{
+  padding:9px 12px;
+  border:1px solid #b9d3d7;
+  border-radius:999px;
+  color:var(--deep);
+  background:white;
+  font-weight:bold;
+}
+.time-chip.selected{border-color:var(--sea);color:white;background:var(--sea)}
+.timeline{margin-top:18px}
+.event{
+  display:grid;
+  grid-template-columns:70px 18px 1fr;
+  gap:11px;
+  min-height:73px;
+}
+.event-time{padding-top:3px;color:var(--deep);font-weight:bold}
+.event-line{position:relative;border-left:3px solid #b9dedb}
+.event-line:before{
+  content:"";
+  position:absolute;
+  left:-8px;top:5px;
+  width:12px;height:12px;
+  border:3px solid white;
+  border-radius:50%;
+  background:var(--sun);
+  box-shadow:0 0 0 2px var(--sea);
+}
+.event-body{
+  margin-bottom:11px;
+  padding:12px 14px;
+  border-radius:13px;
+  background:#f5fbfa;
+}
+.event-body strong{display:block;margin-bottom:4px}
+.warning{background:#fff0ee!important;color:#9b271f}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.checkitem{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:12px;
+  border:1px solid #dce9e9;
+  border-radius:12px;
+  background:#f9fcfb;
+}
+.checkitem input{width:20px;height:20px;accent-color:var(--sea)}
+.link-list{display:grid;gap:10px}
+.info-link{
+  display:flex;
+  justify-content:space-between;
+  padding:14px;
+  border:1px solid #dce9e9;
+  border-radius:13px;
+  color:var(--ink);
+  background:#fafdfc;
+  text-decoration:none;
+  font-weight:bold;
+}
+.toast{
+  position:fixed;
+  right:17px;bottom:17px;
+  z-index:100;
+  max-width:350px;
+  padding:13px 17px;
+  border-radius:12px;
+  color:white;
+  background:#17324d;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(14px);
+  pointer-events:none;
+  transition:.2s;
+}
+.toast.show{opacity:1;transform:none}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.86rem}
+@media(max-width:720px){
+  .grid,.activities,.checklist{grid-template-columns:1fr}
+  .panel{padding:17px}
+  .shell{padding:0 9px}
+  .tab{padding:11px;font-size:.84rem}
+  .event{grid-template-columns:57px 15px 1fr;gap:8px}
+}
+</style>
+</head>
+
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">☀️ Escapade familiale</span>
+    <h1>Les Léon à Porquerolles</h1>
+    <p class="subtitle">
+      Une journée entre mer turquoise, vélo, patrimoine et détente.
+      Choisissez ensemble votre programme.
+    </p>
+    <div class="hero-pills">
+      <span class="pill">📍 Roquebrune-sur-Argens</span>
+      <span class="pill">⛴️ Traversée 15–20 min</span>
+      <span class="pill" id="heroDate">📅 Date à choisir</span>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <nav class="tabs">
+    <button class="tab active" data-page="organiser">🗓️ Organiser</button>
+    <button class="tab" data-page="visites">🏝️ Visites</button>
+    <button class="tab" data-page="navettes">⛴️ Navettes</button>
+    <button class="tab" data-page="planning">✅ Ma journée</button>
+    <button class="tab" data-page="pratique">ℹ️ Pratique</button>
+  </nav>
+
+  <section class="page active" id="organiser">
+    <div class="panel">
+      <h2>Préparer l’excursion</h2>
+
+      <div class="grid">
+        <div class="field">
+          <label for="date">Date de l’excursion</label>
+          <input type="date" id="date">
+        </div>
+
+        <div class="field">
+          <label for="people">Nombre de participants</label>
+          <input type="number" id="people" min="1" max="50">
+        </div>
+
+        <div class="field">
+          <label for="drive">Temps de route prévu</label>
+          <select id="drive">
+            <option value="100">1 h 40</option>
+            <option value="110">1 h 50</option>
+            <option value="120">2 h 00</option>
+            <option value="135">2 h 15 — circulation importante</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="margin">Marge parking et embarquement</label>
+          <select id="margin">
+            <option value="30">30 minutes</option>
+            <option value="45">45 minutes conseillées</option>
+            <option value="60">1 heure en forte affluence</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="notice" id="departure" style="margin-top:16px">
+        Choisissez une navette aller pour calculer l’heure de départ.
+      </div>
+
+      <div class="actions">
+        <button class="btn" data-go="visites">Choisir les visites</button>
+        <a class="btn secondary" target="_blank"
+           href="https://www.google.com/maps/dir/Roquebrune-sur-Argens/La+Tour+Fondue,+Hy%C3%A8res/">
+          Voir le trajet
+        </a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Notes de la famille</h2>
+      <textarea id="notes" rows="4"
+        placeholder="Pique-nique, personnes à prévenir, choses à apporter…"></textarea>
+      <p class="saved">● Les choix sont sauvegardés automatiquement.</p>
+    </div>
+  </section>
+
+  <section class="page" id="visites">
+    <div class="panel">
+      <h2>Que souhaitez-vous découvrir ?</h2>
+      <p class="hint">
+        Cochez les activités puis choisissez leur heure et leur durée.
+      </p>
+      <strong id="visitCount"></strong>
+    </div>
+
+    <div class="activities" id="activities"></div>
+
+    <div class="panel">
+      <div class="actions">
+        <button class="btn sun" id="autoPlan">
+          ✨ Créer automatiquement le planning
+        </button>
+        <button class="btn secondary" data-go="planning">
+          Voir ma journée
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="navettes">
+    <div class="panel">
+      <h2>Navettes TLV — Tour Fondue</h2>
+
+      <div class="notice" id="boatPeriod">
+        Choisissez la date pour afficher les horaires connus.
+      </div>
+
+      <h3>Aller vers Porquerolles</h3>
+      <div class="boat-times" id="outTimes"></div>
+
+      <h3>Retour vers la Tour Fondue</h3>
+      <div class="boat-times" id="backTimes"></div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="boatOut">Heure aller retenue</label>
+          <input type="time" id="boatOut">
+        </div>
+        <div class="field">
+          <label for="boatBack">Heure retour retenue</label>
+          <input type="time" id="boatBack">
+        </div>
+      </div>
+
+      <p class="hint">
+        Les horaires changent selon la saison, les jours fériés et les
+        conditions météo. Vérifiez toujours les horaires avant l’achat.
+      </p>
+
+      <div class="actions">
+        <a class="btn" target="_blank"
+           href="https://www.tlv-tvm.com/iframe-horaires/?trajet=porquerolles">
+          Vérifier les horaires TLV
+        </a>
+        <a class="btn secondary" target="_blank"
+           href="https://tlv-tvm.resactivite.com/liaison-tour-fondue-porquerolles-aller-retour-3">
+          Réserver les billets
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="planning">
+    <div class="panel">
+      <h2>Le programme des Léon</h2>
+      <p class="hint" id="summary"></p>
+      <div class="timeline" id="timeline"></div>
+
+      <div class="actions">
+        <button class="btn sun" id="whatsapp">📲 Partager sur WhatsApp</button>
+        <button class="btn secondary" id="copyLink">Copier le lien du programme</button>
+        <button class="btn secondary" onclick="window.print()">Imprimer / PDF</button>
+      </div>
+
+      <p class="hint">
+        Le lien partagé contient votre programme. Vos proches retrouveront
+        donc la date, les navettes et les visites que vous avez choisies.
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>Avant de partir</h2>
+      <div class="checklist">
+        <label class="checkitem"><input type="checkbox" class="todo" data-id="tickets"> Billets TLV réservés</label>
+        <label class="checkitem"><input type="checkbox" class="todo" data-id="parking"> Parking ou bus prévu</label>
+        <label class="checkitem"><input type="checkbox" class="todo" data-id="water"> Gourdes remplies</label>
+        <label class="checkitem"><input type="checkbox" class="todo" data-id="sun"> Chapeaux et crème solaire</label>
+        <label class="checkitem"><input type="checkbox" class="todo" data-id="shoes"> Chaussures adaptées</label>
+        <label class="checkitem"><input type="checkbox" class="todo" data-id="weather"> Météo et risque incendie vérifiés</label>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="pratique">
+    <div class="panel">
+      <h2>Informations pratiques</h2>
+
+      <div class="link-list">
+        <a class="info-link" target="_blank"
+           href="https://www.provencemed.com/hyeres-porquerolles/porquerolles/">
+          <span>🏝️ Office de tourisme de Porquerolles</span><span>↗</span>
+        </a>
+
+        <a class="info-link" target="_blank"
+           href="https://www.tlv-tvm.com/iframe-horaires/?trajet=porquerolles">
+          <span>⛴️ Horaires officiels TLV</span><span>↗</span>
+        </a>
+
+        <a class="info-link" target="_blank"
+           href="https://www.provencemed.com/hyeres-porquerolles/porquerolles/faire-du-velo-porquerolles/">
+          <span>🚲 Informations vélo</span><span>↗</span>
+        </a>
+
+        <a class="info-link" target="_blank"
+           href="https://www.provencemed.com/hyeres-porquerolles/porquerolles/plages-de-porquerolles/">
+          <span>🏖️ Plages de Porquerolles</span><span>↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Conseils</h2>
+      <ul>
+        <li>Arrivez en avance à la Tour Fondue, particulièrement en été.</li>
+        <li>La réservation du bateau est fortement conseillée.</li>
+        <li>Le parking relais Arromanches et le bus 67 peuvent éviter le stationnement près de l’embarcadère.</li>
+        <li>Prévoyez suffisamment d’eau, des chapeaux et de la crème solaire.</li>
+        <li>Certains sentiers peuvent fermer en cas de risque incendie.</li>
+      </ul>
+
+      <button class="btn red" id="reset">Effacer tous mes choix</button>
+    </div>
+  </section>
+</main>
+
+<footer>Préparé pour la famille Léon • Bonne escapade 🌊</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const VISITS=[
+  {id:"village",icon:"⛪",title:"Village et place d’Armes",tags:["À pied","Gratuit"],duration:45,text:"Promenade autour du port, de la place d’Armes et de l’église Sainte-Anne."},
+  {id:"bike",icon:"🚲",title:"Location des vélos",tags:["Près du port","À réserver"],duration:30,text:"Récupération et réglage des vélos. Pensez aux casques et aux antivols."},
+  {id:"fort",icon:"🏰",title:"Fort Sainte-Agathe",tags:["Patrimoine","Panorama"],duration:60,text:"Fort historique dominant le village. Vérifiez les jours et heures d’ouverture."},
+  {id:"moulin",icon:"🌬️",title:"Moulin du Bonheur",tags:["Photos","Près du fort"],duration:30,text:"Moulin provençal restauré, facile à combiner avec la visite du fort."},
+  {id:"argent",icon:"🏖️",title:"Plage d’Argent",tags:["Baignade","Famille"],duration:90,text:"Plage appréciée pour son sable clair et ses eaux peu profondes."},
+  {id:"notredame",icon:"🌊",title:"Plage Notre-Dame",tags:["Incontournable","Vélo"],duration:120,text:"Une plage emblématique de Porquerolles. Prévoyez le trajet à vélo et un peu de marche."},
+  {id:"carmignac",icon:"🎨",title:"Fondation Carmignac",tags:["Art","Réservation"],duration:120,text:"Art contemporain et jardin de sculptures. La réservation est généralement nécessaire."},
+  {id:"phare",icon:"🌅",title:"Phare et falaises du sud",tags:["Panorama","Vélo"],duration:75,text:"Balade vers la côte sud plus sauvage. Vérifiez les conditions d’accès."},
+  {id:"jardin",icon:"🌿",title:"Jardin Emmanuel Lopez",tags:["Calme","Village"],duration:45,text:"Une agréable pause botanique à proximité du village."},
+  {id:"lunch",icon:"🥗",title:"Déjeuner ou pique-nique",tags:["Pause","Convivial"],duration:75,text:"Restaurant au village ou pique-nique dans un endroit autorisé."}
+];
+
+const SCHEDULES=[
+  {
+    from:"2026-06-29",to:"2026-08-30",
+    label:"Du 29 juin au 30 août 2026",
+    out:["06:45","07:30","08:15","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:30","14:30","15:30","16:30","17:00","17:30","18:00","18:30","19:00"],
+    back:["07:00","07:50","09:00","09:30","10:00","10:30","11:00","11:30","14:00","15:00","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"]
+  },
+  {
+    from:"2026-08-31",to:"2026-09-20",
+    label:"Du 31 août au 20 septembre 2026",
+    out:["07:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:30","14:30","15:30","16:30","17:30","18:30"],
+    back:["07:00","08:30","09:30","10:30","11:30","14:00","15:00","16:00","17:00","18:00","19:00"]
+  },
+  {
+    from:"2026-09-21",to:"2026-11-01",
+    label:"Du 21 septembre au 1er novembre 2026",
+    out:["07:30","09:00","10:00","11:00","12:00","13:30","14:30","15:30","17:00","18:00"],
+    back:["07:00","08:30","09:30","11:30","14:00","15:00","16:30","17:30","18:30"]
+  },
+  {
+    from:"2026-11-02",to:"2027-02-14",
+    label:"Du 2 novembre 2026 au 14 février 2027",
+    out:["07:30","09:00","10:30","12:00","14:30","15:30","16:45","17:45"],
+    back:["07:00","08:30","10:00","11:30","14:00","15:00","16:15","17:15"]
+  },
+  {
+    from:"2027-02-15",to:"2027-03-21",
+    label:"Du 15 février au 21 mars 2027",
+    out:["07:30","09:00","10:30","12:00","14:30","15:30","17:00","18:00"],
+    back:["07:00","08:30","10:00","11:30","14:00","15:00","16:30","17:30"]
+  },
+  {
+    from:"2027-03-22",to:"2027-03-31",
+    label:"Du 22 au 31 mars 2027",
+    out:["07:30","09:00","10:00","10:30","11:30","12:00","12:30","13:30","14:30","15:30","17:00","18:00"],
+    back:["07:00","08:30","09:30","10:30","11:30","14:00","15:00","16:30","17:30","18:30"]
+  }
+];
+
+const DEFAULT={
+  date:"",
+  people:6,
+  drive:110,
+  margin:45,
+  boatOut:"",
+  boatBack:"",
+  notes:"",
+  selected:["village","bike","lunch","argent"],
+  times:{},
+  durations:{},
+  todo:{}
+};
+
+const KEY="famille-leon-porquerolles-v2";
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+
+function cloneDefault(){
+  return JSON.parse(JSON.stringify(DEFAULT));
+}
+
+function encodeState(value){
+  const bytes=new TextEncoder().encode(JSON.stringify(value));
+  let binary="";
+  bytes.forEach(byte=>binary+=String.fromCharCode(byte));
+  return btoa(binary);
+}
+
+function decodeState(value){
+  const binary=atob(value);
+  const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function loadState(){
+  let data=null;
+
+  if(location.hash.startsWith("#programme=")){
+    try{
+      data=decodeState(location.hash.slice(11));
+      localStorage.setItem(KEY,JSON.stringify(data));
+      history.replaceState(null,"",location.pathname);
+    }catch(error){}
+  }
+
+  if(!data){
+    try{data=JSON.parse(localStorage.getItem(KEY)||"null");}
+    catch(error){}
+  }
+
+  data=data||{};
+  return {
+    ...cloneDefault(),
+    ...data,
+    times:{...(data.times||{})},
+    durations:{...(data.durations||{})},
+    todo:{...(data.todo||{})}
+  };
+}
+
+let state=loadState();
+let toastTimer;
+
+function toast(text){
+  $("#toast").textContent=text;
+  $("#toast").classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>$("#toast").classList.remove("show"),2500);
+}
+
+function persist(){
+  localStorage.setItem(KEY,JSON.stringify(state));
+  renderHeader();
+  renderDeparture();
+  renderTimeline();
+  renderCount();
+}
+
+function showPage(id){
+  $$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
+  $$(".page").forEach(x=>x.classList.toggle("active",x.id===id));
+  scrollTo({top:document.querySelector(".tabs").offsetTop-8,behavior:"smooth"});
+}
+
+function formatDate(date){
+  if(!date)return"Date à choisir";
+  return new Intl.DateTimeFormat("fr-FR",{
+    weekday:"long",day:"numeric",month:"long",year:"numeric"
+  }).format(new Date(date+"T12:00:00"));
+}
+
+function minutes(time){
+  if(!time)return null;
+  const parts=time.split(":").map(Number);
+  return parts[0]*60+parts[1];
+}
+
+function clock(value){
+  value=(value+1440)%1440;
+  return String(Math.floor(value/60)).padStart(2,"0")+":"+
+         String(value%60).padStart(2,"0");
+}
+
+function renderHeader(){
+  $("#heroDate").textContent="📅 "+formatDate(state.date);
+}
+
+function renderDeparture(){
+  if(!state.boatOut){
+    $("#departure").textContent=
+      "Choisissez une navette aller pour calculer l’heure de départ.";
+    return;
+  }
+
+  const boat=minutes(state.boatOut);
+  const leave=clock(boat-Number(state.drive)-Number(state.margin));
+  const arrive=clock(boat-Number(state.margin));
+
+  $("#departure").innerHTML=
+    "<strong>Départ conseillé : "+leave+"</strong><br>"+
+    "Arrivée visée à la Tour Fondue : "+arrive+
+    ", pour la navette de "+state.boatOut+
+    ". Cette estimation ne tient pas compte du trafic en direct.";
+}
+
+function renderActivities(){
+  $("#activities").innerHTML=VISITS.map(v=>{
+    const chosen=state.selected.includes(v.id);
+    const duration=state.durations[v.id]||v.duration;
+
+    return `
+      <article class="activity ${chosen?"chosen":""}" data-id="${v.id}">
+        <div class="activity-top">
+          <input class="activity-check" type="checkbox" ${chosen?"checked":""}>
+          <span class="icon">${v.icon}</span>
+          <div>
+            <h3>${v.title}</h3>
+            <div class="tags">
+              ${v.tags.map(t=>`<span class="tag">${t}</span>`).join("")}
+            </div>
+          </div>
+        </div>
+
+        <div class="activity-controls">
+          <div class="field">
+            <label>Heure</label>
+            <input class="activity-time" type="time"
+              value="${state.times[v.id]||""}" ${chosen?"":"disabled"}>
+          </div>
+
+          <div class="field">
+            <label>Durée</label>
+            <select class="activity-duration" ${chosen?"":"disabled"}>
+              ${[30,45,60,75,90,120,150].map(d=>
+                `<option value="${d}" ${Number(duration)===d?"selected":""}>
+                  ${d<60?d+" min":d%60===0?d/60+" h":Math.floor(d/60)+" h "+d%60}
+                </option>`
+              ).join("")}
+            </select>
+          </div>
+        </div>
+
+        <details>
+          <summary>Voir les détails</summary>
+          <p>${v.text}</p>
+        </details>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderCount(){
+  const n=state.selected.length;
+  $("#visitCount").textContent=
+    n+" activité"+(n>1?"s":"")+" sélectionnée"+(n>1?"s":"");
+}
+
+function currentSchedule(){
+  return SCHEDULES.find(s=>state.date>=s.from&&state.date<=s.to);
+}
+
+function renderBoats(){
+  const schedule=currentSchedule();
+
+  if(!state.date){
+    $("#boatPeriod").textContent=
+      "Choisissez la date pour afficher les horaires connus.";
+  }else if(!schedule){
+    $("#boatPeriod").innerHTML=
+      "<strong>Horaires non intégrés pour cette date.</strong><br>"+
+      "Consultez le site TLV : la grille correspondante n’est peut-être pas encore publiée.";
+  }else{
+    $("#boatPeriod").innerHTML=
+      "<strong>"+schedule.label+"</strong><br>"+
+      "Cliquez sur une heure, puis vérifiez-la auprès de TLV avant l’achat.";
+  }
+
+  function chips(list,type,current){
+    if(!list)return'<span class="hint">Consultez le site TLV.</span>';
+
+    return list.map(time=>
+      `<button class="time-chip ${time===current?"selected":""}"
+       data-type="${type}" data-time="${time}">${time}</button>`
+    ).join("");
+  }
+
+  $("#outTimes").innerHTML=chips(schedule?.out,"out",state.boatOut);
+  $("#backTimes").innerHTML=chips(schedule?.back,"back",state.boatBack);
+  $("#boatOut").value=state.boatOut;
+  $("#boatBack").value=state.boatBack;
+}
+
+function autoPlan(){
+  if(!state.boatOut){
+    toast("Choisissez d’abord la navette aller");
+    showPage("navettes");
+    return;
+  }
+
+  if(!state.selected.length){
+    toast("Choisissez au moins une activité");
+    return;
+  }
+
+  let start=minutes(state.boatOut)+40;
+
+  state.selected.forEach(id=>{
+    const visit=VISITS.find(v=>v.id===id);
+    state.times[id]=clock(start);
+    start+=Number(state.durations[id]||visit.duration)+15;
+  });
+
+  renderActivities();
+  persist();
+  showPage("planning");
+  toast("Planning créé automatiquement");
+}
+
+function createEvents(){
+  const events=[];
+
+  if(state.boatOut){
+    const boat=minutes(state.boatOut);
+
+    events.push({
+      time:clock(boat-Number(state.drive)-Number(state.margin)),
+      title:"🚗 Départ de Roquebrune-sur-Argens",
+      detail:"Trajet vers la Tour Fondue"
+    });
+
+    events.push({
+      time:clock(boat-Number(state.margin)),
+      title:"📍 Arrivée à la Tour Fondue",
+      detail:"Stationnement et embarquement"
+    });
+
+    events.push({
+      time:state.boatOut,
+      title:"⛴️ Navette vers Porquerolles",
+      detail:"Traversée d’environ 15 à 20 minutes"
+    });
+  }
+
+  state.selected.forEach(id=>{
+    const visit=VISITS.find(v=>v.id===id);
+
+    if(visit&&state.times[id]){
+      events.push({
+        time:state.times[id],
+        title:visit.icon+" "+visit.title,
+        detail:"Durée prévue : "+(state.durations[id]||visit.duration)+" minutes",
+        duration:Number(state.durations[id]||visit.duration)
+      });
+    }
+  });
+
+  if(state.boatBack){
+    events.push({
+      time:clock(minutes(state.boatBack)-25),
+      title:"⚓ Retour conseillé au port",
+      detail:"Préparation à l’embarquement"
+    });
+
+    events.push({
+      time:state.boatBack,
+      title:"⛴️ Navette retour",
+      detail:"Porquerolles vers la Tour Fondue"
+    });
+  }
+
+  return events.sort((a,b)=>minutes(a.time)-minutes(b.time));
+}
+
+function renderTimeline(){
+  $("#summary").textContent=
+    formatDate(state.date)+" • "+state.people+" participant"+
+    (state.people>1?"s":"")+" • "+state.selected.length+" activité"+
+    (state.selected.length>1?"s":"");
+
+  const events=createEvents();
+
+  if(!events.length){
+    $("#timeline").innerHTML=
+      '<div class="notice">Choisissez les visites et les navettes pour construire la journée.</div>';
+    return;
+  }
+
+  const returnLimit=state.boatBack?minutes(state.boatBack)-25:null;
+
+  $("#timeline").innerHTML=events.map(e=>{
+    const late=e.duration&&returnLimit&&minutes(e.time)+e.duration>returnLimit;
+
+    return `
+      <div class="event">
+        <div class="event-time">${e.time}</div>
+        <div class="event-line"></div>
+        <div class="event-body ${late?"warning":""}">
+          <strong>${e.title}</strong>
+          <span>${e.detail}${late?" — ⚠️ risque d’être trop tard pour le bateau":""}</span>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function shareLink(){
+  const base=location.origin+location.pathname;
+  return base+"#programme="+encodeState(state);
+}
+
+function shareText(){
+  const lines=[
+    "🏝️ Sortie de la famille Léon à Porquerolles",
+    "📅 "+formatDate(state.date),
+    "👨‍👩‍👧‍👦 "+state.people+" participant(s)"
+  ];
+
+  if(state.boatOut)lines.push("⛴️ Aller : "+state.boatOut);
+  if(state.boatBack)lines.push("⛴️ Retour : "+state.boatBack);
+
+  if(state.selected.length){
+    lines.push("","Visites choisies :");
+    state.selected.forEach(id=>{
+      const visit=VISITS.find(v=>v.id===id);
+      lines.push("• "+(state.times[id]||"Heure à définir")+" — "+visit.title);
+    });
+  }
+
+  lines.push("","Ouvrir le programme :",shareLink());
+  return lines.join("\n");
+}
+
+async function copyProgramLink(){
+  try{
+    await navigator.clipboard.writeText(shareLink());
+    toast("Lien du programme copié");
+  }catch(error){
+    prompt("Copiez ce lien :",shareLink());
+  }
+}
+
+function openWhatsApp(){
+  window.open("https://wa.me/?text="+encodeURIComponent(shareText()),"_blank");
+}
+
+function bind(){
+  $$(".tab").forEach(button=>
+    button.onclick=()=>showPage(button.dataset.page)
+  );
+
+  $$("[data-go]").forEach(button=>
+    button.onclick=()=>showPage(button.dataset.go)
+  );
+
+  $("#date").onchange=e=>{
+    state.date=e.target.value;
+    renderBoats();
+    persist();
+  };
+
+  $("#people").oninput=e=>{
+    state.people=Math.max(1,Number(e.target.value)||1);
+    persist();
+  };
+
+  $("#drive").onchange=e=>{
+    state.drive=Number(e.target.value);
+    persist();
+  };
+
+  $("#margin").onchange=e=>{
+    state.margin=Number(e.target.value);
+    persist();
+  };
+
+  $("#notes").oninput=e=>{
+    state.notes=e.target.value;
+    localStorage.setItem(KEY,JSON.stringify(state));
+  };
+
+  $("#activities").onchange=e=>{
+    const card=e.target.closest(".activity");
+    if(!card)return;
+    const id=card.dataset.id;
+
+    if(e.target.classList.contains("activity-check")){
+      if(e.target.checked&&!state.selected.includes(id))state.selected.push(id);
+      if(!e.target.checked)state.selected=state.selected.filter(x=>x!==id);
+      renderActivities();
+    }
+
+    if(e.target.classList.contains("activity-time")){
+      state.times[id]=e.target.value;
+    }
+
+    if(e.target.classList.contains("activity-duration")){
+      state.durations[id]=Number(e.target.value);
+    }
+
+    persist();
+  };
+
+  $("#navettes").onclick=e=>{
+    const chip=e.target.closest(".time-chip");
+    if(!chip)return;
+
+    if(chip.dataset.type==="out")state.boatOut=chip.dataset.time;
+    else state.boatBack=chip.dataset.time;
+
+    renderBoats();
+    persist();
+  };
+
+  $("#boatOut").onchange=e=>{
+    state.boatOut=e.target.value;
+    renderBoats();
+    persist();
+  };
+
+  $("#boatBack").onchange=e=>{
+    state.boatBack=e.target.value;
+    renderBoats();
+    persist();
+  };
+
+  $("#autoPlan").onclick=autoPlan;
+  $("#copyLink").onclick=copyProgramLink;
+  $("#whatsapp").onclick=openWhatsApp;
+
+  $$(".todo").forEach(box=>{
+    box.onchange=()=>{
+      state.todo[box.dataset.id]=box.checked;
+      persist();
+    };
+  });
+
+  $("#reset").onclick=()=>{
+    if(confirm("Effacer tous les choix et recommencer ?")){
+      state=cloneDefault();
+      localStorage.removeItem(KEY);
+      init();
+      showPage("organiser");
+      toast("Choix effacés");
+    }
+  };
+}
+
+function init(){
+  $("#date").value=state.date;
+  $("#people").value=state.people;
+  $("#drive").value=String(state.drive);
+  $("#margin").value=String(state.margin);
+  $("#notes").value=state.notes;
+
+  $$(".todo").forEach(box=>{
+    box.checked=Boolean(state.todo[box.dataset.id]);
+  });
+
+  renderHeader();
+  renderActivities();
+  renderBoats();
+  renderDeparture();
+  renderTimeline();
+  renderCount();
+}
+
+bind();
+init();
+</script>
+</body>
+</html>
